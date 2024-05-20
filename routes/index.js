@@ -1,9 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const server={}
+const ubah_password = require('./ubah_password')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+server.ubah_password = ubah_password
 
-module.exports = router;
+module.exports = server;
