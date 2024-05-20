@@ -1,6 +1,10 @@
 {
   "name": "sibss",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MuhammadZakiAndafi/SIBSS"
+  },
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
