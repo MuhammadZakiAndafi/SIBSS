@@ -1,8 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
-const session = require('express-session')
 const mysql = require('mysql')
-const path = require('path')
 
 const router = express.Router()
 
@@ -11,7 +9,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'login'
+  database: 'sibss'
 })
 
 // connecting database

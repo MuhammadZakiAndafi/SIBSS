@@ -4,11 +4,7 @@ var express = require('express');
 
 var bcrypt = require('bcryptjs');
 
-var session = require('express-session');
-
 var mysql = require('mysql');
-
-var path = require('path');
 
 var router = express.Router(); // Config to MySQL
 
@@ -16,7 +12,7 @@ var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'login'
+  database: 'sibss'
 }); // connecting database
 
 db.connect(function (err) {
