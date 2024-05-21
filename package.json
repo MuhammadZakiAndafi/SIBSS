@@ -1,24 +1,33 @@
 {
   "name": "sibss",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MuhammadZakiAndafi/SIBSS"
+  },
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
     "build": "npx tailwindcss -i ./src/input.css -o ./public/stylesheets/style.css --watch"
   },
   "dependencies": {
+
     "bcrypt": "^5.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-session": "^1.18.0",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "~1.9.1",
+
     "mysql2": "^3.9.7",
     "preline": "^2.1.0",
     "sequelize": "^6.37.3",
     "sweetalert2": "^11.11.0"
+
   },
   "devDependencies": {
     "tailwindcss": "^3.4.3"
