@@ -14,6 +14,19 @@ var indexRouter = require('./routes/index');
 
 var usersRouter = require('./routes/users');
 
+var indexRouter = require('./routes/index');
+
+var usersRouter = require('./routes/users');
+
+var editRouter = require('./routes/editprofile');
+
+var loginRouter = require('./routes/login');
+
+var dashboardRouter = require('./routes/dashboard'); // Import route dashboard
+
+
+var profileRouter = require('./routes/profile');
+
 var app = express(); // view engine setup
 
 app.set('views', path.join(__dirname, 'views'));
@@ -27,7 +40,11 @@ app.use(cookieParser());
 app.use(express["static"](path.join(__dirname, "./node_modules/preline/dist")));
 app.use(express["static"](path.join(__dirname, 'public')));
 app.use('/', indexRouter);
-app.use('/users', usersRouter); // catch 404 and forward to error handler
+app.use('/users', usersRouter);
+app.use('/editprofile', editRouter);
+app.use('/login', loginRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/profile', profileRouter); // catch 404 and forward to error handler
 
 app.use(function (req, res, next) {
   next(createError(404));
@@ -40,10 +57,13 @@ app.use(function (err, req, res, next) {
 
   res.status(err.status || 500);
   res.render('error');
-});
-module.exports = app;
+}); // Set port and start server
+
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
-  console.log("Server berjalan di http://localhost:".concat(PORT));
+  console.log("Server is running on http://localhost:".concat(PORT));
+}).on('error', function (err) {
+  console.error("Server failed to start due to error: ".concat(err.message));
 });
+module.exports = app;
 //# sourceMappingURL=app.dev.js.map
