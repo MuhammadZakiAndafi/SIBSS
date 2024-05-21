@@ -1,16 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const server={}
+const ubah_password = require('./ubah_password')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Login' });
-});
 
-router.get('/editprofile', function(req, res, next) {
-  res.render('editprofil', { title: 'EditProfile' });
-});
+server.ubah_password = ubah_password
 
-module.exports = router;
+
+module.exports = server;
