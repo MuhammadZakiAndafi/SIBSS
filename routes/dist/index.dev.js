@@ -1,9 +1,10 @@
 "use strict";
 
-var express = require('express');
+var server = {};
 
-var router = express.Router();
+var ubah_password = require('./ubah_password');
 /* GET home page. */
+
 
 router.get('/', function (req, res, next) {
   res.render('index', {
@@ -30,5 +31,5 @@ router.get('/editprofile', function (req, res, next) {
     title: 'EditProfile'
   });
 });
-module.exports = router;
+module.exports = server;
 //# sourceMappingURL=index.dev.js.map
