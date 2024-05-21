@@ -6,12 +6,11 @@ var logger = require('morgan');
 
 var server = require('./routes/index');
 var usersRouter = require('./routes/users');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var editRouter = require('./routes/editprofile');
 var loginRouter = require('./routes/login');
-var dashboardRouter = require('./routes/dashboard'); // Import route dashboard
+var dashboardRouter = require('./routes/dashboard');
 var profileRouter = require('./routes/profile');
+var ubah_password = require('./routes/ubah_password')
 
 var app = express();
 
@@ -27,12 +26,11 @@ app.use(express.static(path.join(__dirname, "./node_modules/preline/dist")));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
-app.use('/editprofile', editRouter);
+app.use('/profile/editprofile', editRouter);
 app.use('/login', loginRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/profile', profileRouter);
-
-app.use('/', server.ubah_password )
+app.use('/profile/ubahpassword', server.ubah_password )
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
