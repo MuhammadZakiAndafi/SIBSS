@@ -18,8 +18,5 @@ router.get('/profile', function(req, res, next) {
   res.render('profile', { title: 'profile' });
 });
 
-router.get('/editprofil', function(req, res, next) {
-  res.render('editprofil', { title: 'editprofil' });
-});
 
 module.exports = router;
