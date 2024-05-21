@@ -6,6 +6,12 @@ var logger = require('morgan');
 
 var server = require('./routes/index');
 var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var editRouter = require('./routes/editprofile');
+var loginRouter = require('./routes/login');
+var dashboardRouter = require('./routes/dashboard'); // Import route dashboard
+var profileRouter = require('./routes/profile');
 
 var app = express();
 
@@ -21,6 +27,10 @@ app.use(express.static(path.join(__dirname, "./node_modules/preline/dist")));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
+app.use('/editprofile', editRouter);
+app.use('/login', loginRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/profile', profileRouter);
 
 app.use('/', server.ubah_password )
 
@@ -40,10 +50,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
-
+// Set port and start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server berjalan di http://localhost:${PORT}`);
-
+  console.log(`Server is running on http://localhost:${PORT}`);
+}).on('error', (err) => {
+  console.error(`Server failed to start due to error: ${err.message}`);
 });
+
+module.exports = app;
