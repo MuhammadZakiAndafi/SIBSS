@@ -1,5 +1,6 @@
-const server={}
-const ubah_password = require('./ubah_password')
+const express = require('express');
+const router = express.Router();
+const ubah_password = require('./ubah_password');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -20,4 +21,5 @@ router.get('/editprofile', function(req, res, next) {
 router.get('/ubah_password', function(req, res, next) {
   res.render('ubah_password', { title: 'UbahPassword' });
 });
-module.exports = server;
+
+module.exports = router;

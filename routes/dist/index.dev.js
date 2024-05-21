@@ -1,6 +1,8 @@
 "use strict";
 
-var server = {};
+var express = require('express');
+
+var router = express.Router();
 
 var ubah_password = require('./ubah_password');
 /* GET home page. */
@@ -36,5 +38,5 @@ router.get('/ubah_password', function (req, res, next) {
     title: 'UbahPassword'
   });
 });
-module.exports = server;
+module.exports = router;
 //# sourceMappingURL=index.dev.js.map

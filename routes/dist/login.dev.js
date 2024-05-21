@@ -31,7 +31,7 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
   var _req$body = req.body,
       username = _req$body.username,
-      password = _req$body.password; // Checking fof password and username
+      password = _req$body.password; // Checking for password and username
 
   if (!username || !password) {
     return res.status(400).send('Please provide username and password');
