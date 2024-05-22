@@ -49,11 +49,11 @@ app.use(function(err, req, res, next) {
 });
 
 // Set port and start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-}).on('error', (err) => {
-  console.error(`Server failed to start due to error: ${err.message}`);
-});
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// }).on('error', (err) => {
+//   console.error(`Server failed to start due to error: ${err.message}`);
+// });
 
 module.exports = app;
