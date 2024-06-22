@@ -1,17 +1,26 @@
 const PDFDocument = require('pdfkit');
 const fs = require("fs");
+const db = require('../models');
 
-const download = async (req, res) => {
+exports.downloadSK = async (req, res) => {
   try {
-    const { id } = req.params;
-    const User = await users.findAll({
-      where: {
-        Id: id
-      },
+  const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+    const userlogin = req.session.user;
+    const userRole = userlogin.role; // Mendapatkan role user
+    // Ambil pengajuan yang terhubung dengan userId
+    const pengajuan = await db.Pengajuan.findOne({
+      where: { userId: userId }
     });
-    const matkul = await Subject.findByPk(id,{
-      include:[Lecturer]
-    })
+    const sks = await db.SuratKeputusan.findAll({
+      where: { pengajuanId: pengajuan.id },
+      include: [{model: db.Pengajuan}]
+    });
+
+    res.render('user/suratkeputusan', {
+       sks,
+       title: 'Surat Keputusan',
+       userRole
+       });
 
 // Buat dokumen PDF baru
 const doc = new PDFDocument();
@@ -29,9 +38,9 @@ pengajuan.forEach((pengajuan, index) => {
   doc.fontSize(12).text(`${index + 1}. Nomor surat: ${pengajuan.id}`);
   doc.text(`   Nama: ${pengajuan.name}`);
   doc.text(`   Nim: ${pengajuan.nim}`);
+  doc.text(`   SKS: ${pengajuan.sks}`);
   doc.moveDown(0.1);
 });
-
 
 // Selesaikan dokumen
 doc.end();
@@ -39,9 +48,4 @@ doc.end();
 console.error('Error generating PDF:', error);
 res.status(500).send('Internal Server Error');
 }
-
-};
-
-module.exports = {
-doc
 };

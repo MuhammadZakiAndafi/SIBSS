@@ -1,9 +1,13 @@
 "use strict";
 
+var PDFDocument = require('pdfkit');
+
+var fs = require("fs");
+
 var db = require('../models');
 
-exports.showSk = function _callee(req, res) {
-  var userId, userlogin, userRole, pengajuan, sks;
+exports.downloadSK = function _callee(req, res) {
+  var userId, userlogin, userRole, pengajuan, sks, doc;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -40,21 +44,41 @@ exports.showSk = function _callee(req, res) {
             sks: sks,
             title: 'Surat Keputusan',
             userRole: userRole
+          }); // Buat dokumen PDF baru
+
+          doc = new PDFDocument();
+          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Disposition', "attachment; filename=\"SK-BSS-".concat(user.name, ".pdf\"")); // Pipe output PDF ke response
+
+          doc.pipe(res); // Tambahkan konten ke PDF
+
+          doc.fontSize(20).text("Surat Keputusan Berhenti Studi Sementara Tahun Ajaran 2024/2025 ".concat(pengajuan.fakultas), {
+            align: 'center'
           });
-          _context.next = 17;
+          doc.moveDown(0.1);
+          pengajuan.forEach(function (pengajuan, index) {
+            doc.fontSize(12).text("".concat(index + 1, ". Nomor surat: ").concat(pengajuan.id));
+            doc.text("   Nama: ".concat(pengajuan.name));
+            doc.text("   Nim: ".concat(pengajuan.nim));
+            doc.text("   SKS: ".concat(pengajuan.sks));
+            doc.moveDown(0.1);
+          }); // Selesaikan dokumen
+
+          doc.end();
+          _context.next = 25;
           break;
 
-        case 13:
-          _context.prev = 13;
+        case 21:
+          _context.prev = 21;
           _context.t0 = _context["catch"](0);
-          console.error('Error fetching surat keputusan:', _context.t0);
+          console.error('Error generating PDF:', _context.t0);
           res.status(500).send('Internal Server Error');
 
-        case 17:
+        case 25:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  }, null, null, [[0, 21]]);
 };
-//# sourceMappingURL=skController.dev.js.map
+//# sourceMappingURL=createSK.dev.js.map

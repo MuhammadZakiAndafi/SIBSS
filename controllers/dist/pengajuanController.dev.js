@@ -1,5 +1,7 @@
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var db = require('../models');
 
 exports.showRegisBss = function _callee(req, res) {
@@ -43,19 +45,19 @@ exports.showRegisBss = function _callee(req, res) {
   }, null, null, [[0, 9]]);
 };
 
-exports.showPanduan = function _callee2(req, res) {
-  var userId, user, userRole, pengajuan, dokumenPendukung;
+exports.showProfile = function _callee2(req, res) {
+  var _res$render, userId, userlogin, userRole, pengajuan, user;
+
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-
-          user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
-
-          userRole = user.role; // Mendapatkan role user
-          // Ambil pengajuan yang terhubung dengan userId
+          // Ambil data pengguna yang sedang login
+          userId = req.session.user.id;
+          userlogin = req.session.user;
+          userRole = userlogin.role; // Mendapatkan role user
+          // Ambil pengajuanId dari model Pengajuan berdasarkan userId
 
           _context2.next = 6;
           return regeneratorRuntime.awrap(db.Pengajuan.findOne({
@@ -72,46 +74,56 @@ exports.showPanduan = function _callee2(req, res) {
             break;
           }
 
-          return _context2.abrupt("return", res.status(404).send('Data pengajuan tidak ditemukan'));
+          throw new Error('Pengajuan not found');
 
         case 9:
-          // Ambil dokumen_pendukung dari pengajuan
-          dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : []; // Render halaman panduan dengan data dokumenPendukung
+          _context2.next = 11;
+          return regeneratorRuntime.awrap(db.User.findAll({
+            where: {
+              userId: user.id
+            },
+            include: [{
+              model: db.User
+            }]
+          }));
 
-          res.render('user/panduan', {
-            title: 'Panduan',
-            dokumenPendukung: dokumenPendukung,
-            userRole: userRole
-          });
-          _context2.next = 17;
+        case 11:
+          user = _context2.sent;
+          // Render halaman status dengan data approvals dan pengguna yang sedang login
+          res.render('user/profile', (_res$render = {
+            title: 'Profile',
+            user: req.session.user
+          }, _defineProperty(_res$render, "user", user), _defineProperty(_res$render, "userRole", userRole), _res$render));
+          _context2.next = 19;
           break;
 
-        case 13:
-          _context2.prev = 13;
+        case 15:
+          _context2.prev = 15;
           _context2.t0 = _context2["catch"](0);
-          console.error('Error fetching supporting documents:', _context2.t0);
+          console.error('Error fetching approvals:', _context2.t0);
           res.status(500).send('Internal Server Error');
 
-        case 17:
+        case 19:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  }, null, null, [[0, 15]]);
 };
 
-exports.showStatus = function _callee3(req, res) {
-  var userId, userlogin, userRole, pengajuan, approvals;
+exports.showPanduan = function _callee3(req, res) {
+  var userId, user, userRole, pengajuan, dokumenPendukung;
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          // Ambil data pengguna yang sedang login
-          userId = req.session.user.id;
-          userlogin = req.session.user;
-          userRole = userlogin.role; // Mendapatkan role user
-          // Ambil pengajuanId dari model Pengajuan berdasarkan userId
+          userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+
+          user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
+
+          userRole = user.role; // Mendapatkan role user
+          // Ambil pengajuan yang terhubung dengan userId
 
           _context3.next = 6;
           return regeneratorRuntime.awrap(db.Pengajuan.findOne({
@@ -128,10 +140,66 @@ exports.showStatus = function _callee3(req, res) {
             break;
           }
 
+          return _context3.abrupt("return", res.status(404).send('Data pengajuan tidak ditemukan'));
+
+        case 9:
+          // Ambil dokumen_pendukung dari pengajuan
+          dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : []; // Render halaman panduan dengan data dokumenPendukung
+
+          res.render('user/panduan', {
+            title: 'Panduan',
+            dokumenPendukung: dokumenPendukung,
+            userRole: userRole
+          });
+          _context3.next = 17;
+          break;
+
+        case 13:
+          _context3.prev = 13;
+          _context3.t0 = _context3["catch"](0);
+          console.error('Error fetching supporting documents:', _context3.t0);
+          res.status(500).send('Internal Server Error');
+
+        case 17:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
+};
+
+exports.showStatus = function _callee4(req, res) {
+  var userId, userlogin, userRole, pengajuan, approvals;
+  return regeneratorRuntime.async(function _callee4$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          // Ambil data pengguna yang sedang login
+          userId = req.session.user.id;
+          userlogin = req.session.user;
+          userRole = userlogin.role; // Mendapatkan role user
+          // Ambil pengajuanId dari model Pengajuan berdasarkan userId
+
+          _context4.next = 6;
+          return regeneratorRuntime.awrap(db.Pengajuan.findOne({
+            where: {
+              userId: userId
+            }
+          }));
+
+        case 6:
+          pengajuan = _context4.sent;
+
+          if (pengajuan) {
+            _context4.next = 9;
+            break;
+          }
+
           throw new Error('Pengajuan not found');
 
         case 9:
-          _context3.next = 11;
+          _context4.next = 11;
           return regeneratorRuntime.awrap(db.Approval.findAll({
             where: {
               pengajuanId: pengajuan.id
@@ -142,7 +210,7 @@ exports.showStatus = function _callee3(req, res) {
           }));
 
         case 11:
-          approvals = _context3.sent;
+          approvals = _context4.sent;
           // Render halaman status dengan data approvals dan pengguna yang sedang login
           res.render('user/status', {
             title: 'Status Pengajuan',
@@ -151,18 +219,18 @@ exports.showStatus = function _callee3(req, res) {
             approvals: approvals,
             userRole: userRole
           });
-          _context3.next = 19;
+          _context4.next = 19;
           break;
 
         case 15:
-          _context3.prev = 15;
-          _context3.t0 = _context3["catch"](0);
-          console.error('Error fetching approvals:', _context3.t0);
+          _context4.prev = 15;
+          _context4.t0 = _context4["catch"](0);
+          console.error('Error fetching approvals:', _context4.t0);
           res.status(500).send('Internal Server Error');
 
         case 19:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   }, null, null, [[0, 15]]);
@@ -178,14 +246,14 @@ exports.showRiwayat = function (req, res) {
   });
 };
 
-exports.createPermohonanBss = function _callee4(req, res) {
+exports.createPermohonanBss = function _callee5(req, res) {
   var _req$body, nama_lengkap, nim, tanggal_lahir, jenis_kelamin, alamat, no_hp, departement, fakultas, kendala_bss, alasan_berhenti, dokumen_pendukung, userId, permohonan;
 
-  return regeneratorRuntime.async(function _callee4$(_context4) {
+  return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
-      switch (_context4.prev = _context4.next) {
+      switch (_context5.prev = _context5.next) {
         case 0:
-          _context4.prev = 0;
+          _context5.prev = 0;
           _req$body = req.body, nama_lengkap = _req$body.nama_lengkap, nim = _req$body.nim, tanggal_lahir = _req$body.tanggal_lahir, jenis_kelamin = _req$body.jenis_kelamin, alamat = _req$body.alamat, no_hp = _req$body.no_hp, departement = _req$body.departement, fakultas = _req$body.fakultas, kendala_bss = _req$body.kendala_bss, alasan_berhenti = _req$body.alasan_berhenti;
           dokumen_pendukung = null;
 
@@ -195,7 +263,7 @@ exports.createPermohonanBss = function _callee4(req, res) {
 
           userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
 
-          _context4.next = 7;
+          _context5.next = 7;
           return regeneratorRuntime.awrap(db.Pengajuan.create({
             nama_lengkap: nama_lengkap,
             nim: nim,
@@ -213,62 +281,26 @@ exports.createPermohonanBss = function _callee4(req, res) {
           }));
 
         case 7:
-          permohonan = _context4.sent;
+          permohonan = _context5.sent;
           console.log('Permohonan berhasil dibuat:', permohonan);
           res.redirect('/pendaftaranBss');
-          _context4.next = 16;
+          _context5.next = 16;
           break;
 
         case 12:
-          _context4.prev = 12;
-          _context4.t0 = _context4["catch"](0);
-          console.error('Terjadi kesalahan saat membuat permohonan:', _context4.t0);
+          _context5.prev = 12;
+          _context5.t0 = _context5["catch"](0);
+          console.error('Terjadi kesalahan saat membuat permohonan:', _context5.t0);
           res.status(500).json({
             message: 'Terjadi kesalahan pada server',
-            error: _context4.t0
+            error: _context5.t0
           });
 
         case 16:
         case "end":
-          return _context4.stop();
-      }
-    }
-  }, null, null, [[0, 12]]);
-};
-
-exports.showProfile = function _callee5(req, res) {
-  var user;
-  return regeneratorRuntime.async(function _callee5$(_context5) {
-    while (1) {
-      switch (_context5.prev = _context5.next) {
-        case 0:
-          _context5.prev = 0;
-          _context5.next = 3;
-          return regeneratorRuntime.awrap(db.User.findOne({
-            where: {
-              id: req.session.user.id
-            }
-          }));
-
-        case 3:
-          user = _context5.sent;
-          res.render('user/profile', {
-            user: user
-          });
-          _context5.next = 11;
-          break;
-
-        case 7:
-          _context5.prev = 7;
-          _context5.t0 = _context5["catch"](0);
-          console.error('Error fetching user:', _context5.t0);
-          res.status(500).send('Internal Server Error');
-
-        case 11:
-        case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 12]]);
 };
 //# sourceMappingURL=pengajuanController.dev.js.map

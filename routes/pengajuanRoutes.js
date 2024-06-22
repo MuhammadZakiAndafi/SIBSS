@@ -19,6 +19,7 @@ router.get('/pendaftaranBss', cekRole,ensureAuthenticated,pengajuanController.sh
 router.get('/status', cekRole,ensureAuthenticated,pengajuanController.showStatus);
 router.get('/riwayatpengajuan', cekRole,ensureAuthenticated,pengajuanController.showRiwayat);
 router.get('/panduan', cekRole,ensureAuthenticated,pengajuanController.showPanduan);
+router.get('/profile', cekRole,ensureAuthenticated, pengajuanController.showProfile);
 router.post('/pendaftaranBss', upload.single('dokumen_pendukung'), pengajuanController.createPermohonanBss);
-router.get('/profile', cekRole, pengajuanController.showProfile);
+
 module.exports = router;
