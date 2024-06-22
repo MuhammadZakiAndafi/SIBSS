@@ -1,6 +1,4 @@
 const db = require('../models');
-const path = require('path');
-
 
 exports.showRegisBss = async (req, res) => {
   try {
@@ -83,7 +81,6 @@ exports.showStatus = async (req, res) => {
   }
 };
 
-
 exports.showRiwayat = (req, res) => {
   const userlogin = req.session.user;
     const userRole = userlogin.role; // Mendapatkan role user
@@ -92,8 +89,6 @@ exports.showRiwayat = (req, res) => {
     userRole
    });
 };
-
-
 
 exports.createPermohonanBss = async (req, res) => {
   try {
@@ -122,5 +117,15 @@ exports.createPermohonanBss = async (req, res) => {
   } catch (error) {
     console.error('Terjadi kesalahan saat membuat permohonan:', error);
     res.status(500).json({ message: 'Terjadi kesalahan pada server', error });
+  }
+};
+
+exports.showProfile = async (req, res) => {
+  try {
+    const user = await db.User.findOne({ where: { id: req.session.user.id } });
+    res.render('user/profile', { user: user });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).send('Internal Server Error');
   }
 };
