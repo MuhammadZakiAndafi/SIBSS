@@ -48,41 +48,41 @@ exports.showPanduan = async (req, res) => {
   }
 };
 
+exports.showStatus = async (req, res) => {
+  try {
+    // Ambil data pengguna yang sedang login
+    const userId = req.session.user.id;
+    const userlogin = req.session.user;
+    const userRole = userlogin.role; // Mendapatkan role user
 
-// exports.showStatus = async (req, res) => {
-//   try {
-//     // Ambil data pengguna yang sedang login
-//     const userId = req.session.user.id;
-//     const userlogin = req.session.user;
-//     const userRole = userlogin.role; // Mendapatkan role user
+    // Ambil pengajuanId dari model Pengajuan berdasarkan userId
+    const pengajuan = await db.Pengajuan.findOne({
+      where: { userId: userId }
+    }); 
 
-//     // Ambil pengajuanId dari model Pengajuan berdasarkan userId
-//     const pengajuan = await db.Pengajuan.findOne({
-//       where: { userId: userId }
-//     }); 
+    if (!pengajuan) {
+      throw new Error('Pengajuan not found');
+    }
 
-//     if (!pengajuan) {
-//       throw new Error('Pengajuan not found');
-//     }
+    // Ambil data Approval berdasarkan pengajuanId
+    const approvals = await db.Approval.findAll({
+      where: { pengajuanId: pengajuan.id },
+      include: [{ model: db.Pengajuan }]
+    });
 
-//     // Ambil data Approval berdasarkan pengajuanId
-//     const approvals = await db.Approval.findAll({
-//       where: { pengajuanId: pengajuan.id },
-//       include: [{ model: db.Pengajuan }]
-//     });
+    // Render halaman status dengan data approvals dan pengguna yang sedang login
+    res.render('user/status', {
+      title: 'Status Pengajuan',
+      user: req.session.user, // Data pengguna yang sedang login
+      approvals: approvals,
+      userRole
+    });
+  } catch (error) {
+    console.error('Error fetching approvals:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
-//     // Render halaman status dengan data approvals dan pengguna yang sedang login
-//     res.render('user/status', {
-//       title: 'Status Pengajuan',
-//       user: req.session.user, // Data pengguna yang sedang login
-//       approvals: approvals,
-//       userRole
-//     });
-//   } catch (error) {
-//     console.error('Error fetching approvals:', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
 
 exports.showRiwayat = (req, res) => {
   const userlogin = req.session.user;

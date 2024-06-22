@@ -9,6 +9,7 @@ db.sequelize = sequelize;
 
 db.User = require('./user')(sequelize, DataTypes);
 db.Pengajuan = require('./pengajuan')(sequelize, DataTypes);
+db.Approval = require('./approval')(sequelize, DataTypes);
 db.SuratKeputusan = require('./sk')(sequelize, DataTypes);
 
 // Mengatur asosiasi model
