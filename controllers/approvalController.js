@@ -58,7 +58,19 @@ exports.updateApprovalStatus = async (req, res) => {
       };
     }
 
-    await db.Approval.update(updateData, { where: { pengajuanId } });
+    // Gunakan findOrCreate untuk mencari atau membuat record baru
+    const [approval, created] = await db.Approval.findOrCreate({
+      where: { pengajuanId },
+      defaults: {
+        pengajuanId,
+        ...updateData
+      }
+    });
+
+    // Jika record ditemukan, lakukan update
+    if (!created) {
+      await approval.update(updateData);
+    }
 
     req.flash('success', 'Approval status updated successfully');
     res.redirect('/daftarPengajuan');
