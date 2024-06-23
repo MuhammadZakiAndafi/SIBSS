@@ -251,8 +251,8 @@
                     <% } %>
                     <!-- Add a button for generating PDF -->
                     <div class="mt-4">
-                        <form action="/generate-pdf/<%= sk.id %>" method="POST">
-                        <button type="submit" class="bg-green-600 text-white rounded px-4 py-2">Generate & Download PDF</button>
+                        <form action="/generate-pdf/<%= sk.id %>" method="GET">
+                        <button type="submit" class="bg-green-600 text-white rounded px-4 py-2">Download SK</button>
                         </form>
                     </div>
                   </div>
