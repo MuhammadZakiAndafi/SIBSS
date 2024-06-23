@@ -90,6 +90,15 @@ exports.showRiwayat = (req, res) => {
    });
 };
 
+exports.showRiwayatMhs = (req, res) => {
+  const userlogin = req.session.user;
+  const userRole = userlogin.role; // Mendapatkan role user
+  res.render('user/riwayatMhs', { 
+    title: 'Riwayat Mahasiswa',
+    userRole
+   });
+};
+
 exports.createPermohonanBss = async (req, res) => {
   try {
     const {
