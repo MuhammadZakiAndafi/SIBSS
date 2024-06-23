@@ -2,33 +2,65 @@
 
 var PDFDocument = require('pdfkit');
 
-var fs = require("fs");
+var fs = require('fs');
+
+var ejs = require('ejs');
+
+var _require = require('util'),
+    promisify = _require.promisify;
 
 var db = require('../models');
 
-exports.downloadSK = function _callee(req, res) {
-  var userId, userlogin, userRole, pengajuan, sks, doc;
-  return regeneratorRuntime.async(function _callee$(_context) {
+exports.generate = function _callee(req, res) {
+  var generatePDF, userId, userlogin, userRole, pengajuan, sks, renderFile;
+  return regeneratorRuntime.async(function _callee$(_context2) {
     while (1) {
-      switch (_context.prev = _context.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
-          _context.prev = 0;
+          _context2.prev = 0;
+
+          generatePDF = function generatePDF(data, outputPath) {
+            var html, doc;
+            return regeneratorRuntime.async(function generatePDF$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return regeneratorRuntime.awrap(renderFile(__dirname + '/views/template.ejs', data));
+
+                  case 2:
+                    html = _context.sent;
+                    doc = new PDFDocument();
+                    doc.pipe(fs.createWriteStream(outputPath));
+                    doc.text(html, {
+                      align: 'justify'
+                    });
+                    doc.end();
+
+                  case 7:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            });
+          };
+
           userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
 
           userlogin = req.session.user;
           userRole = userlogin.role; // Mendapatkan role user
           // Ambil pengajuan yang terhubung dengan userId
 
-          _context.next = 6;
+          _context2.next = 7;
           return regeneratorRuntime.awrap(db.Pengajuan.findOne({
             where: {
               userId: userId
             }
           }));
 
-        case 6:
-          pengajuan = _context.sent;
-          _context.next = 9;
+        case 7:
+          pengajuan = _context2.sent;
+          _context2.next = 10;
           return regeneratorRuntime.awrap(db.SuratKeputusan.findAll({
             where: {
               pengajuanId: pengajuan.id
@@ -38,47 +70,29 @@ exports.downloadSK = function _callee(req, res) {
             }]
           }));
 
-        case 9:
-          sks = _context.sent;
-          res.render('user/suratkeputusan', {
+        case 10:
+          sks = _context2.sent;
+          res.render('/template', {
             sks: sks,
             title: 'Surat Keputusan',
             userRole: userRole
-          }); // Buat dokumen PDF baru
-
-          doc = new PDFDocument();
-          res.setHeader('Content-Type', 'application/pdf');
-          res.setHeader('Content-Disposition', "attachment; filename=\"SK-BSS-".concat(user.name, ".pdf\"")); // Pipe output PDF ke response
-
-          doc.pipe(res); // Tambahkan konten ke PDF
-
-          doc.fontSize(20).text("Surat Keputusan Berhenti Studi Sementara Tahun Ajaran 2024/2025 ".concat(pengajuan.fakultas), {
-            align: 'center'
           });
-          doc.moveDown(0.1);
-          pengajuan.forEach(function (pengajuan, index) {
-            doc.fontSize(12).text("".concat(index + 1, ". Nomor surat: ").concat(pengajuan.id));
-            doc.text("   Nama: ".concat(pengajuan.name));
-            doc.text("   Nim: ".concat(pengajuan.nim));
-            doc.text("   SKS: ".concat(pengajuan.sks));
-            doc.moveDown(0.1);
-          }); // Selesaikan dokumen
-
-          doc.end();
-          _context.next = 25;
+          renderFile = promisify(ejs.renderFile);
+          module.exports = generatePDF;
+          _context2.next = 20;
           break;
 
-        case 21:
-          _context.prev = 21;
-          _context.t0 = _context["catch"](0);
-          console.error('Error generating PDF:', _context.t0);
+        case 16:
+          _context2.prev = 16;
+          _context2.t0 = _context2["catch"](0);
+          console.error('Error generating PDF:', _context2.t0);
           res.status(500).send('Internal Server Error');
 
-        case 25:
+        case 20:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
     }
-  }, null, null, [[0, 21]]);
+  }, null, null, [[0, 16]]);
 };
 //# sourceMappingURL=createSK.dev.js.map

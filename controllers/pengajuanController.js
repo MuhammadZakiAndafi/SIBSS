@@ -16,41 +16,6 @@ exports.showRegisBss = async (req, res) => {
   }
 };
 
-exports.showProfile = async (req, res) => {
-  try {
-    // Ambil data pengguna yang sedang login
-    const userId = req.session.user.id;
-    const userlogin = req.session.user;
-    const userRole = userlogin.role; // Mendapatkan role user
-
-    // Ambil pengajuanId dari model Pengajuan berdasarkan userId
-    const pengajuan = await db.Pengajuan.findOne({
-      where: { userId: userId }
-    }); 
-
-    if (!pengajuan) {
-      throw new Error('Pengajuan not found');
-    }
-
-    // Ambil data Approval berdasarkan pengajuanId
-    const user = await db.User.findAll({
-      where: { userId: user.id },
-      include: [{ model: db.User }]
-    });
-
-    // Render halaman status dengan data approvals dan pengguna yang sedang login
-    res.render('user/profile', {
-      title: 'Profile',
-      user: req.session.user, // Data pengguna yang sedang login
-      user: user,
-      userRole
-    });
-  } catch (error) {
-    console.error('Error fetching approvals:', error);
-    res.status(500).send('Internal Server Error');
-  }
-};
-
 exports.showPanduan = async (req, res) => {
   try {
     const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
