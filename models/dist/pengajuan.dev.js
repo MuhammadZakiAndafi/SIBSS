@@ -55,6 +55,9 @@ module.exports = function (sequelize, DataTypes) {
     Pengajuan.hasMany(models.Approval, {
       foreignKey: 'pengajuanId'
     });
+    Pengajuan.hasMany(models.SuratKeputusan, {
+      foreignKey: 'pengajuanId'
+    });
   };
 
   return Pengajuan;

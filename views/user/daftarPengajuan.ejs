@@ -272,8 +272,11 @@
                   <td class="border px-4 py-2"><%= pengajuan.alasan_berhenti %></td>
                   <td class="border px-4 py-2"><%= pengajuan.no_hp %></td>
                   <td class="border px-4 py-2">
-                    <a href="/detail/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Detail</a>
-                  </td>
+                          <a href="/detail/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Detail</a>
+                          <% if (userRole === 'wadek') { %>
+                            <a href="/generate-pdf/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">SendSK</a>
+                          <% } %>
+                    </td>
                 </tr>
                 <% }) %>
               </tbody>

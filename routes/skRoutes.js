@@ -7,5 +7,5 @@ const cekRole = require('../middlewares/cekRole');
 router.get('/suratkeputusan', cekRole,ensureAuthenticated,skController.showSk);
 router.get('/suratkeputusan/generate/:id', cekRole, ensureAuthenticated, skController.generateSK);
 
-router.post('/generate-pdf/:id', skController.generateSK);
+router.get('/generate-pdf/:id', skController.generateSK);
 module.exports = router;

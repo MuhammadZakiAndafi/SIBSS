@@ -65,7 +65,7 @@ exports.showSk = function _callee(req, res) {
 };
 
 exports.generateSK = function _callee2(req, res) {
-  var pengajuanId, pengajuan, doc, filePath, output;
+  var pengajuanId, pengajuan, doc, outputDir, filePath, output;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -95,9 +95,16 @@ exports.generateSK = function _callee2(req, res) {
 
         case 8:
           // Create a new PDF document
-          doc = new PDFDocument(); // Pipe the PDF into a writable stream which then gets piped to response
+          doc = new PDFDocument(); // Set up the output file path and create the directory if it doesn't exist
 
-          filePath = path.join(__dirname, '..', 'tmp', "sk_".concat(pengajuanId, ".pdf"));
+          outputDir = path.join(__dirname, '..', 'output');
+
+          if (!fs.existsSync(outputDir)) {
+            fs.mkdirSync(outputDir);
+          }
+
+          filePath = path.join(outputDir, "sk_".concat(pengajuanId, ".pdf")); // Pipe the PDF into a writable stream
+
           output = fs.createWriteStream(filePath);
           doc.pipe(output); // Build the content of the PDF dynamically based on pengajuan data
 
@@ -105,38 +112,51 @@ exports.generateSK = function _callee2(req, res) {
           doc.text("Surat Keputusan");
           doc.moveDown(); // Insert content dynamically
 
-          doc.text("Nomor Surat: ".concat(pengajuan.SuratKeputusan.nomor));
-          doc.text("Tanggal: ".concat(pengajuan.SuratKeputusan.tanggal.toDateString())); // Add more content as needed
+          if (pengajuan.SuratKeputusan) {
+            doc.text("Nomor Surat: ".concat(pengajuan.SuratKeputusan.nomor));
+            doc.text("Tanggal: ".concat(pengajuan.SuratKeputusan.tanggal.toDateString()));
+          } else {
+            doc.text("Nomor Surat: -");
+            doc.text("Tanggal: -");
+          } // Add more content as needed
           // Finalize the PDF and close the stream
 
-          doc.end(); // Send file as response for download
 
-          output.on('finish', function () {
-            res.download(filePath, "SK_".concat(pengajuanId, ".pdf"), function (err) {
-              if (err) {
-                console.error('Error sending file:', err);
-                res.status(500).send('Failed to download file.');
-              } // Delete the temporary file after download
+          doc.end(); // Save the SK to database
 
+          if (pengajuan.SuratKeputusan) {
+            _context2.next = 22;
+            break;
+          }
 
-              fs.unlinkSync(filePath);
-            });
-          });
-          _context2.next = 26;
+          _context2.next = 22;
+          return regeneratorRuntime.awrap(db.SuratKeputusan.create({
+            pengajuanId: pengajuanId,
+            nomor: '',
+            tanggal: new Date(),
+            keterangan: '',
+            lampiran: '' // Add more fields as needed
+
+          }));
+
+        case 22:
+          // Send a success response
+          res.status(201).send("SK generated successfully and saved to ".concat(filePath));
+          _context2.next = 30;
           break;
 
-        case 21:
-          _context2.prev = 21;
+        case 25:
+          _context2.prev = 25;
           _context2.t0 = _context2["catch"](0);
           console.error('Error generating SK:', _context2.t0);
           req.flash('error', 'Failed to generate SK');
           res.redirect('/daftarPengajuan');
 
-        case 26:
+        case 30:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 21]]);
+  }, null, null, [[0, 25]]);
 };
 //# sourceMappingURL=skController.dev.js.map

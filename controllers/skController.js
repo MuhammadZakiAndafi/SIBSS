@@ -46,8 +46,14 @@ exports.generateSK = async (req, res) => {
     // Create a new PDF document
     const doc = new PDFDocument();
 
-    // Pipe the PDF into a writable stream which then gets piped to response
-    const filePath = path.join(__dirname, '..', 'tmp', `sk_${pengajuanId}.pdf`);
+    // Set up the output file path and create the directory if it doesn't exist
+    const outputDir = path.join(__dirname, '..', 'output');
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir);
+    }
+    const filePath = path.join(outputDir, `sk_${pengajuanId}.pdf`);
+
+    // Pipe the PDF into a writable stream
     const output = fs.createWriteStream(filePath);
     doc.pipe(output);
 
@@ -57,24 +63,32 @@ exports.generateSK = async (req, res) => {
     doc.moveDown();
 
     // Insert content dynamically
-    doc.text(`Nomor Surat: ${pengajuan.SuratKeputusan.nomor}`);
-    doc.text(`Tanggal: ${pengajuan.SuratKeputusan.tanggal.toDateString()}`);
+    if (pengajuan.SuratKeputusan) {
+      doc.text(`Nomor Surat: ${pengajuan.SuratKeputusan.nomor}`);
+      doc.text(`Tanggal: ${pengajuan.SuratKeputusan.tanggal.toDateString()}`);
+    } else {
+      doc.text(`Nomor Surat: -`);
+      doc.text(`Tanggal: -`);
+    }
     // Add more content as needed
 
     // Finalize the PDF and close the stream
     doc.end();
 
-    // Send file as response for download
-    output.on('finish', () => {
-      res.download(filePath, `SK_${pengajuanId}.pdf`, (err) => {
-        if (err) {
-          console.error('Error sending file:', err);
-          res.status(500).send('Failed to download file.');
-        }
-        // Delete the temporary file after download
-        fs.unlinkSync(filePath);
+    // Save the SK to database
+    if (!pengajuan.SuratKeputusan) {
+      await db.SuratKeputusan.create({
+        pengajuanId: pengajuanId,
+        nomor: '',
+        tanggal: new Date(),
+        keterangan: '',
+        lampiran: '',
+        // Add more fields as needed
       });
-    });
+    }
+
+    // Send a success response
+    res.status(201).send(`SK generated successfully and saved to ${filePath}`);
 
   } catch (error) {
     console.error('Error generating SK:', error);
