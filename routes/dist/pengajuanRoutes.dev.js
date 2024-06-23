@@ -28,6 +28,6 @@ router.get('/status', cekRole, ensureAuthenticated, pengajuanController.showStat
 router.get('/riwayatpengajuan', cekRole, ensureAuthenticated, pengajuanController.showRiwayat);
 router.get('/panduan', cekRole, ensureAuthenticated, pengajuanController.showPanduan);
 router.post('/pendaftaranBss', upload.single('dokumen_pendukung'), pengajuanController.createPermohonanBss);
-router.get('/profile', cekRole, pengajuanController.showProfile);
+router.get('/riwayatMhs', cekRole, ensureAuthenticated, pengajuanController.showRiwayatMhs);
 module.exports = router;
 //# sourceMappingURL=pengajuanRoutes.dev.js.map

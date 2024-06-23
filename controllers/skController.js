@@ -1,6 +1,7 @@
 const db = require('../models');
+const fs = require('fs');
+const path = require('path');
 const PDFDocument = require('pdfkit');
-const fs = require("fs");
 
 exports.showSk = async (req, res) => {
   try {
@@ -27,45 +28,57 @@ exports.showSk = async (req, res) => {
   }
 };
 
-exports.downloadSK = async (req, res) => {
-  const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-    const userlogin = req.session.user;
-    const userRole = userlogin.role; // Mendapatkan role user
-    // Ambil pengajuan yang terhubung dengan userId
+exports.generateSK = async (req, res) => {
+  try {
+    const pengajuanId = req.params.id;
+    
+    // Fetch pengajuan details
     const pengajuan = await db.Pengajuan.findOne({
-      where: { userId: userId }
-    });
-    const sks = await db.SuratKeputusan.findAll({
-      where: { pengajuanId: pengajuan.id },
-      include: [{model: db.Pengajuan}]
+      where: { id: pengajuanId },
+      include: [db.SuratKeputusan] // Include SK if needed
     });
 
-    res.render('user/suratkeputusan', {
-       sks,
-       title: 'Surat Keputusan',
-       userRole
-       });
+    if (!pengajuan) {
+      req.flash('error', 'Pengajuan tidak ditemukan.');
+      return res.redirect('/daftarPengajuan');
+    }
 
-// Buat dokumen PDF baru
-const doc = new PDFDocument();
-res.setHeader('Content-Type', 'application/pdf');
-res.setHeader('Content-Disposition', `attachment; filename="SK-BSS-${user.name}.pdf"`);
+    // Create a new PDF document
+    const doc = new PDFDocument();
 
-// Pipe output PDF ke response
-doc.pipe(res);
+    // Pipe the PDF into a writable stream which then gets piped to response
+    const filePath = path.join(__dirname, '..', 'tmp', `sk_${pengajuanId}.pdf`);
+    const output = fs.createWriteStream(filePath);
+    doc.pipe(output);
 
-// Tambahkan konten ke PDF
-doc.fontSize(20).text(`Surat Keputusan Berhenti Studi Sementara Tahun Ajaran 2024/2025 ${pengajuan.fakultas}`, { align: 'center' });
-doc.moveDown(0.1);
+    // Build the content of the PDF dynamically based on pengajuan data
+    doc.fontSize(12);
+    doc.text(`Surat Keputusan`);
+    doc.moveDown();
 
-pengajuan.forEach((pengajuan, index) => {
-  doc.fontSize(12).text(`${index + 1}. Nomor surat: ${pengajuan.id}`);
-  doc.text(`   Nama: ${pengajuan.name}`);
-  doc.text(`   Nim: ${pengajuan.nim}`);
-  doc.text(`   SKS: ${pengajuan.sks}`);
-  doc.moveDown(0.1);
-});
+    // Insert content dynamically
+    doc.text(`Nomor Surat: ${pengajuan.SuratKeputusan.nomor}`);
+    doc.text(`Tanggal: ${pengajuan.SuratKeputusan.tanggal.toDateString()}`);
+    // Add more content as needed
 
-// Selesaikan dokumen
-doc.end();
-}
+    // Finalize the PDF and close the stream
+    doc.end();
+
+    // Send file as response for download
+    output.on('finish', () => {
+      res.download(filePath, `SK_${pengajuanId}.pdf`, (err) => {
+        if (err) {
+          console.error('Error sending file:', err);
+          res.status(500).send('Failed to download file.');
+        }
+        // Delete the temporary file after download
+        fs.unlinkSync(filePath);
+      });
+    });
+
+  } catch (error) {
+    console.error('Error generating SK:', error);
+    req.flash('error', 'Failed to generate SK');
+    res.redirect('/daftarPengajuan');
+  }
+};

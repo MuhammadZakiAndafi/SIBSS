@@ -178,6 +178,16 @@ exports.showRiwayat = function (req, res) {
   });
 };
 
+exports.showRiwayatMhs = function (req, res) {
+  var userlogin = req.session.user;
+  var userRole = userlogin.role; // Mendapatkan role user
+
+  res.render('user/riwayatMhs', {
+    title: 'Riwayat Mahasiswa',
+    userRole: userRole
+  });
+};
+
 exports.createPermohonanBss = function _callee4(req, res) {
   var _req$body, nama_lengkap, nim, tanggal_lahir, jenis_kelamin, alamat, no_hp, departement, fakultas, kendala_bss, alasan_berhenti, dokumen_pendukung, userId, permohonan;
 
@@ -234,41 +244,5 @@ exports.createPermohonanBss = function _callee4(req, res) {
       }
     }
   }, null, null, [[0, 12]]);
-};
-
-exports.showProfile = function _callee5(req, res) {
-  var user;
-  return regeneratorRuntime.async(function _callee5$(_context5) {
-    while (1) {
-      switch (_context5.prev = _context5.next) {
-        case 0:
-          _context5.prev = 0;
-          _context5.next = 3;
-          return regeneratorRuntime.awrap(db.User.findOne({
-            where: {
-              id: req.session.user.id
-            }
-          }));
-
-        case 3:
-          user = _context5.sent;
-          res.render('user/profile', {
-            user: user
-          });
-          _context5.next = 11;
-          break;
-
-        case 7:
-          _context5.prev = 7;
-          _context5.t0 = _context5["catch"](0);
-          console.error('Error fetching user:', _context5.t0);
-          res.status(500).send('Internal Server Error');
-
-        case 11:
-        case "end":
-          return _context5.stop();
-      }
-    }
-  }, null, null, [[0, 7]]);
 };
 //# sourceMappingURL=pengajuanController.dev.js.map

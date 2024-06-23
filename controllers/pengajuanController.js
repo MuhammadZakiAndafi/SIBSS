@@ -83,9 +83,18 @@ exports.showStatus = async (req, res) => {
 
 exports.showRiwayat = (req, res) => {
   const userlogin = req.session.user;
-    const userRole = userlogin.role; // Mendapatkan role user
+  const userRole = userlogin.role; // Mendapatkan role user
   res.render('user/riwayatpengajuan', { 
     title: 'riwayatpengajuan',
+    userRole
+   });
+};
+
+exports.showRiwayatMhs = (req, res) => {
+  const userlogin = req.session.user;
+  const userRole = userlogin.role; // Mendapatkan role user
+  res.render('user/riwayatMhs', { 
+    title: 'Riwayat Mahasiswa',
     userRole
    });
 };
@@ -117,15 +126,5 @@ exports.createPermohonanBss = async (req, res) => {
   } catch (error) {
     console.error('Terjadi kesalahan saat membuat permohonan:', error);
     res.status(500).json({ message: 'Terjadi kesalahan pada server', error });
-  }
-};
-
-exports.showProfile = async (req, res) => {
-  try {
-    const user = await db.User.findOne({ where: { id: req.session.user.id } });
-    res.render('user/profile', { user: user });
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    res.status(500).send('Internal Server Error');
   }
 };

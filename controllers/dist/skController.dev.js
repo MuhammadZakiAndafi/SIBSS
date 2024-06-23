@@ -2,9 +2,11 @@
 
 var db = require('../models');
 
-var PDFDocument = require('pdfkit');
+var fs = require('fs');
 
-var fs = require("fs");
+var path = require('path');
+
+var PDFDocument = require('pdfkit');
 
 exports.showSk = function _callee(req, res) {
   var userId, userlogin, userRole, pengajuan, sks;
@@ -62,70 +64,79 @@ exports.showSk = function _callee(req, res) {
   }, null, null, [[0, 13]]);
 };
 
-exports.downloadSK = function _callee2(req, res) {
-  var userId, userlogin, userRole, pengajuan, sks, doc;
+exports.generateSK = function _callee2(req, res) {
+  var pengajuanId, pengajuan, doc, filePath, output;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+          _context2.prev = 0;
+          pengajuanId = req.params.id; // Fetch pengajuan details
 
-          userlogin = req.session.user;
-          userRole = userlogin.role; // Mendapatkan role user
-          // Ambil pengajuan yang terhubung dengan userId
-
-          _context2.next = 5;
+          _context2.next = 4;
           return regeneratorRuntime.awrap(db.Pengajuan.findOne({
             where: {
-              userId: userId
-            }
+              id: pengajuanId
+            },
+            include: [db.SuratKeputusan] // Include SK if needed
+
           }));
 
-        case 5:
+        case 4:
           pengajuan = _context2.sent;
-          _context2.next = 8;
-          return regeneratorRuntime.awrap(db.SuratKeputusan.findAll({
-            where: {
-              pengajuanId: pengajuan.id
-            },
-            include: [{
-              model: db.Pengajuan
-            }]
-          }));
+
+          if (pengajuan) {
+            _context2.next = 8;
+            break;
+          }
+
+          req.flash('error', 'Pengajuan tidak ditemukan.');
+          return _context2.abrupt("return", res.redirect('/daftarPengajuan'));
 
         case 8:
-          sks = _context2.sent;
-          res.render('user/suratkeputusan', {
-            sks: sks,
-            title: 'Surat Keputusan',
-            userRole: userRole
-          }); // Buat dokumen PDF baru
+          // Create a new PDF document
+          doc = new PDFDocument(); // Pipe the PDF into a writable stream which then gets piped to response
 
-          doc = new PDFDocument();
-          res.setHeader('Content-Type', 'application/pdf');
-          res.setHeader('Content-Disposition', "attachment; filename=\"SK-BSS-".concat(user.name, ".pdf\"")); // Pipe output PDF ke response
+          filePath = path.join(__dirname, '..', 'tmp', "sk_".concat(pengajuanId, ".pdf"));
+          output = fs.createWriteStream(filePath);
+          doc.pipe(output); // Build the content of the PDF dynamically based on pengajuan data
 
-          doc.pipe(res); // Tambahkan konten ke PDF
+          doc.fontSize(12);
+          doc.text("Surat Keputusan");
+          doc.moveDown(); // Insert content dynamically
 
-          doc.fontSize(20).text("Surat Keputusan Berhenti Studi Sementara Tahun Ajaran 2024/2025 ".concat(pengajuan.fakultas), {
-            align: 'center'
+          doc.text("Nomor Surat: ".concat(pengajuan.SuratKeputusan.nomor));
+          doc.text("Tanggal: ".concat(pengajuan.SuratKeputusan.tanggal.toDateString())); // Add more content as needed
+          // Finalize the PDF and close the stream
+
+          doc.end(); // Send file as response for download
+
+          output.on('finish', function () {
+            res.download(filePath, "SK_".concat(pengajuanId, ".pdf"), function (err) {
+              if (err) {
+                console.error('Error sending file:', err);
+                res.status(500).send('Failed to download file.');
+              } // Delete the temporary file after download
+
+
+              fs.unlinkSync(filePath);
+            });
           });
-          doc.moveDown(0.1);
-          pengajuan.forEach(function (pengajuan, index) {
-            doc.fontSize(12).text("".concat(index + 1, ". Nomor surat: ").concat(pengajuan.id));
-            doc.text("   Nama: ".concat(pengajuan.name));
-            doc.text("   Nim: ".concat(pengajuan.nim));
-            doc.text("   SKS: ".concat(pengajuan.sks));
-            doc.moveDown(0.1);
-          }); // Selesaikan dokumen
+          _context2.next = 26;
+          break;
 
-          doc.end();
+        case 21:
+          _context2.prev = 21;
+          _context2.t0 = _context2["catch"](0);
+          console.error('Error generating SK:', _context2.t0);
+          req.flash('error', 'Failed to generate SK');
+          res.redirect('/daftarPengajuan');
 
-        case 18:
+        case 26:
         case "end":
           return _context2.stop();
       }
     }
-  });
+  }, null, null, [[0, 21]]);
 };
 //# sourceMappingURL=skController.dev.js.map
