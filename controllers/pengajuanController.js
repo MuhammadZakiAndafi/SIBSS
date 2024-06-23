@@ -1,4 +1,7 @@
+const { where } = require('sequelize');
 const db = require('../models');
+const moment = require('moment');
+const path = require('path');
 
 exports.showRegisBss = async (req, res) => {
   try {
@@ -81,22 +84,134 @@ exports.showStatus = async (req, res) => {
   }
 };
 
-exports.showRiwayat = (req, res) => {
+exports.showRiwayat = async (req, res) => {
   const userlogin = req.session.user;
   const userRole = userlogin.role; // Mendapatkan role user
-  res.render('user/riwayatpengajuan', { 
+
+  const pengajuans = await db.Pengajuan.findAll();
+
+  // console.log(pengajuans);
+
+  if (!pengajuans) {
+    throw new Error('Pengajuan not found');
+  } else {
+    var pengajuanss = new Array();
+    pengajuans.forEach(pengajuan => {
+      var d = new Date();
+      const year = d.getFullYear();
+      const month = d.getMonth();
+      // var lastDay = new Date(year, month + 1, 0).getDate();
+      var status = "";
+      var periodesemester = "";
+      var tglberenti = "";
+      var batasperiode = "";
+
+      const monthcreated = pengajuan.createdAt.toJSON().substring(5, 7);
+      if (parseInt(monthcreated) <= 6) {
+        periodesemester = year + "-" + "Ganjil";
+        var lastDay = new Date(year, 6, 0).getDate();
+        tglberenti = year + "-" + "06-" + lastDay;
+        batasperiode = tglberenti;
+        var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
+        var tanggal2 = new moment(tglberenti);
+        var selisih = tanggal2.diff(tanggal1, 'days');
+        if (selisih < 0) {
+          status = "BSS Berakhir";
+        } else {
+          status = "On Progress";
+        }
+      } else {
+        periodesemester = year + "-" + "Genap";
+        var lastDay = new Date(year, 12, 0).getDate();
+        tglberenti = year + "-" + "12-" + lastDay;
+        batasperiode = tglberenti;
+        var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
+        var tanggal2 = new moment(tglberenti);
+        var selisih = tanggal2.diff(tanggal1, 'days');
+        if (selisih < 0) {
+          status = "BSS Berakhir";
+        } else {
+          status = "On Progress";
+        }
+      }
+
+      var obj = { id: pengajuan.id, createdAt: pengajuan.createdAt, kendala_bss: pengajuan.kendala_bss, status: status, tglberenti: tglberenti, periodesemester: periodesemester, batasperiode: batasperiode, statuspemulihan: "-" };
+      pengajuanss.push(obj);
+    });
+
+  }
+
+  res.render('user/riwayatpengajuan', {
     title: 'riwayatpengajuan',
+    pengajuans: pengajuanss,
     userRole
-   });
+  });
 };
 
-exports.showRiwayatMhs = (req, res) => {
+
+exports.showRiwayatMahasiswa = async (req, res) => {
   const userlogin = req.session.user;
   const userRole = userlogin.role; // Mendapatkan role user
-  res.render('user/riwayatMhs', { 
-    title: 'Riwayat Mahasiswa',
+
+  const pengajuans = await db.Pengajuan.findAll({
+    where: { userId: userlogin.id }
+  });
+
+  if (!pengajuans) {
+    throw new Error('Pengajuan not found');
+  } else {
+    var pengajuanss = new Array();
+    pengajuans.forEach(pengajuan => {
+      var d = new Date();
+      const year = d.getFullYear();
+      const month = d.getMonth();
+      // var lastDay = new Date(year, month + 1, 0).getDate();
+      var status = "";
+      var periodesemester = "";
+      var tglberenti = "";
+      var batasperiode = "";
+
+      const monthcreated = pengajuan.createdAt.toJSON().substring(5, 7);
+      if (parseInt(monthcreated) <= 6) {
+        periodesemester = year + "-" + "Ganjil";
+        var lastDay = new Date(year, 6, 0).getDate();
+        tglberenti = year + "-" + "06-" + lastDay;
+        batasperiode = tglberenti;
+
+        var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
+        var tanggal2 = new moment(tglberenti);
+        var selisih = tanggal2.diff(tanggal1, 'days');
+        if (selisih < 0) {
+          status = "BSS Berakhir";
+        } else {
+          status = "On Progress";
+        }
+      } else {
+        periodesemester = year + "-" + "Genap";
+        var lastDay = new Date(year, 12, 0).getDate();
+        tglberenti = year + "-" + "12-" + lastDay;
+        batasperiode = tglberenti;
+        var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
+        var tanggal2 = new moment(tglberenti);
+        var selisih = tanggal2.diff(tanggal1, 'days');
+        if (selisih < 0) {
+          status = "BSS Berakhir";
+        } else {
+          status = "On Progress";
+        }
+      }
+
+      var obj = { id: pengajuan.id, createdAt: pengajuan.createdAt, kendala_bss: pengajuan.kendala_bss, status: status, tglberenti: tglberenti, periodesemester: periodesemester, batasperiode: batasperiode, statuspemulihan: "-" };
+      pengajuanss.push(obj);
+    });
+
+  }
+
+  res.render('user/riwayatpengajuan', {
+    title: 'riwayatpengajuan',
+    pengajuans: pengajuanss,
     userRole
-   });
+  });
 };
 
 exports.createPermohonanBss = async (req, res) => {
