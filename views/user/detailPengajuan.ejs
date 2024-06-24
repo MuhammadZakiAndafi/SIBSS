@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/template.css">
-    <title><%= title %></title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/template.css">
+    <link rel="stylesheet" href="../css/status.css">
+    <title>Status BSS</title>
 </head>
+
 <body class="text-gray-800 font-inter">
+
     <!-- start: Sidebar -->
     <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
         <a href="#" class="flex items-center pb-4 border-b border-b-gray-200">
@@ -47,11 +51,11 @@
                   <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
                 </li> 
                 <li class="mb-4">
-                  <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
-                </li> 
-                <li class="mb-4">
-                    <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
+                    <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
                   </li> 
+                <li class="mb-4">
+                  <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
+                </li> 
                 <li class="mb-4">
                   <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
                 </li> 
@@ -73,7 +77,7 @@
     </div>
     <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
     <!-- end: Sidebar -->
-    
+
     <!-- start: Main -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
         <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
@@ -89,13 +93,17 @@
             </ul>
             <ul class="ml-auto flex items-center">
                 <li class="mr-1 dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
+                    <button type="button"
+                        class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
                         <i class="ri-search-line"></i>
                     </button>
-                    <div class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
+                    <div
+                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
                         <form action="" class="p-4 border-b border-b-gray-100">
                             <div class="relative w-full">
-                                <input type="text" class="py-2 pr-4 pl-10 bg-gray-50 w-full outline-none border border-gray-100 rounded-md text-sm focus:border-blue-500" placeholder="Search...">
+                                <input type="text"
+                                    class="py-2 pr-4 pl-10 bg-gray-50 w-full outline-none border border-gray-100 rounded-md text-sm focus:border-blue-500"
+                                    placeholder="Search...">
                                 <i class="ri-search-line absolute top-1/2 left-4 -translate-y-1/2 text-gray-400"></i>
                             </div>
                         </form>
@@ -104,100 +112,132 @@
                             <ul class="max-h-64 overflow-y-auto">
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">Create landing page</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                Create landing page</div>
                                             <div class="text-[11px] text-gray-400">$345</div>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">Create landing page</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                Create landing page</div>
                                             <div class="text-[11px] text-gray-400">$345</div>
                                         </div>
                                     </a>
                                 </li>
-                                
-                                
+
+
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li class="dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
+                    <button type="button"
+                        class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
                         <i class="ri-notification-3-line"></i>
                     </button>
-                    <div class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
+                    <div
+                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
                         <div class="flex items-center px-4 pt-4 border-b border-b-gray-100 notification-tab">
-                            <button type="button" data-tab="notification" data-tab-page="notifications" class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1 active">Notifications</button>
-                            <button type="button" data-tab="notification" data-tab-page="messages" class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1">Messages</button>
+                            <button type="button" data-tab="notification" data-tab-page="notifications"
+                                class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1 active">Notifications</button>
+                            <button type="button" data-tab="notification" data-tab-page="messages"
+                                class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1">Messages</button>
                         </div>
                         <div class="my-2">
                             <ul class="max-h-64 overflow-y-auto" data-tab-for="notification" data-page="notifications">
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">New order</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                New order</div>
                                             <div class="text-[11px] text-gray-400">from a user</div>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">New order</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                New order</div>
                                             <div class="text-[11px] text-gray-400">from a user</div>
                                         </div>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="max-h-64 overflow-y-auto hidden" data-tab-for="notification" data-page="messages">
+                            <ul class="max-h-64 overflow-y-auto hidden" data-tab-for="notification"
+                                data-page="messages">
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                John Doe</div>
                                             <div class="text-[11px] text-gray-400">Hello there!</div>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                John Doe</div>
                                             <div class="text-[11px] text-gray-400">Hello there!</div>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                John Doe</div>
                                             <div class="text-[11px] text-gray-400">Hello there!</div>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                John Doe</div>
                                             <div class="text-[11px] text-gray-400">Hello there!</div>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                                        <img src="https://placehold.co/32x32" alt=""
+                                            class="w-8 h-8 rounded block object-cover align-middle">
                                         <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
+                                            <div
+                                                class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
+                                                John Doe</div>
                                             <div class="text-[11px] text-gray-400">Hello there!</div>
                                         </div>
                                     </a>
@@ -207,104 +247,99 @@
                     </div>
                 </li>
                 <li class="dropdown ml-3">
-                    <button type="button" class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
-                      <i class="ri-user-line"></i>
+                    <button type="button"
+                        class="dropdown-toggle text-gray-400 w-8 h-8 rounded flex items-center justify-center hover:bg-gray-50 hover:text-gray-600">
+                        <i class="ri-user-line"></i>
                     </button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                    <ul
+                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                            <a href="#"
+                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
+                            <a href="#"
+                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
                         </li>
                         <li>
-                            <a href="/logout" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
+                            <a href="/logout"
+                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
         <!-- content -->
-        <div class="container mx-auto p-6 con-pendaftaranbss">
-          <form class="space-y-6" action="/pendaftaranBss" method="post" enctype="multipart/form-data">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input1" class="block text-sm font-medium text-gray-700">Nama lengkap</label>
-                      <input type="text" id="input1" name="nama_lengkap" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                      <label for="input2" class="block text-sm font-medium text-gray-700">NIM</label>
-                      <input value="<%= user.nim %>" type="text" id="input2" name="nim" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-              </div>
-              <!-- Baris kedua -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input3" class="block text-sm font-medium text-gray-700">Tanggal lahir</label>
-                      <input type="date" id="input3" name="tanggal_lahir" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                    <label for="jeniskelamin" class="block text-sm font-medium text-gray-700">Jenis kelamin</label>
-                    <select id="jeniskelamin" name="jenis_kelamin" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                        <option value="Pria">Pria</option>
-                        <option value="Wanita">Wanita</option>
-                    </select>
-                  </div>
-              </div>
-              <!-- Baris ketiga -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input5" class="block text-sm font-medium text-gray-700">Alamat</label>
-                      <input type="text" id="input5" name="alamat" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                      <label for="input6" class="block text-sm font-medium text-gray-700">No HP</label>
-                      <input type="text" id="input6" name="no_hp" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-              </div>
-              <!-- Baris keempat -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input7" class="block text-sm font-medium text-gray-700">Departement</label>
-                      <input type="text" id="input7" name="departement" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                      <label for="input8" class="block text-sm font-medium text-gray-700">Fakultas</label>
-                      <input type="text" id="input8" name="fakultas" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-              </div>
-              <!-- Baris kelima -->
-              <div style="margin-bottom:30px;">
-                  <label for="input9" class="block text-sm font-medium text-gray-700">Kendala BSS</label>
-                  <input type="text" id="input9" name="kendala_bss" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-              </div>
-              <!-- Baris keenam -->
-              <div style="margin-bottom:30px;">
-                <label for="input10" class="block text-sm font-medium text-gray-700">Alasan berhenti studi sementara</label>
-                <textarea id="input10" name="alasan_berhenti" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-              </div>
-              
-              <!-- Baris ketujuh -->
-              <div>
-                  <label for="file" class="block text-sm font-medium text-gray-700">Upload dokumen pendukung</label>
-                  <input type="file" id="file" name="dokumen_pendukung" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none sm:text-sm">
-              </div>
-              <!-- Button submit -->
-              <div>
-                  <button type="submit" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: rgb(37 99 235);">
-                      Submit
-                  </button>
-              </div>
-          </form>
-      </div>
-      
+        <div class="p-8 w-11/12 mx-auto">
+            <div class="text-2xl font-bold mb-4">Detail Pengajuan</div>
+            <div class="bg-white shadow-lg rounded-lg p-6 overflow-x-auto">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2">
+                        <label for="entries" class="text-sm">Show</label>
+                        <select id="entries" class="border rounded px-2 py-1 text-sm">
+                            <option>7</option>
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                        </select>
+                        <span class="text-sm">Entries</span>
+                    </div>
+                    <div class="relative">
+                        <input type="text" placeholder="Silahkan isikan Keyword"
+                            class="border rounded px-2 py-1 text-sm">
+                        <button class="absolute right-1 top-1">
+                            <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M12.9 14.32a8 8 0 111.414-1.414l4.243 4.243-1.414 1.414-4.243-4.243zm-5.9-5.32a6 6 0 1112 0 6 6 0 01-12 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border px-4 py-2">ID Pengajuan</th>
+                            <th class="border px-4 py-2">Tanggal Pengajuan</th>
+                            <th class="border px-4 py-2">Nama Lengkap</th>
+                            <th class="border px-4 py-2">Nim</th>
+                            <th class="border px-4 py-2">Tgl Lahir</th>
+                            <th class="border px-4 py-2">Jenis Kelamin</th>
+                            <th class="border px-4 py-2">Alamat</th>
+                            <th class="border px-4 py-2">No HP</th>
+                            <th class="border px-4 py-2">Departement</th>
+                            <th class="border px-4 py-2">Fakultas</th>
+                            <th class="border px-4 py-2">Kendala BSS</th>
+                            <th class="border px-4 py-2">Alasan Berenti</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% pengajuans.forEach(pengajuan=> { %>
+                            <td class="border px-4 py-2"><%= pengajuan.id %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.createdAt %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.nama_lengkap %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.nim %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.tanggal_lahir %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.jenis_kelamin %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.alamat %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.no_hp %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.departement %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.fakultas %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.kendala_bss %></td>
+                            <td class="border px-4 py-2"><%= pengajuan.alasan_berhenti %></td>
+                        <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <!-- end content -->
-        
     </main>
     <!-- end: Main -->
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
+
 </html>

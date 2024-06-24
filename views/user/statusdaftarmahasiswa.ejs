@@ -7,74 +7,76 @@
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/template.css">
     <link rel="stylesheet" href="./css/status.css">
-    <title>Status BSS</title>
+    <title>Daftar Pengajuan</title>
 </head>
-<body class="text-gray-800 font-inter">
-  <!-- start: Sidebar -->
-  <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
-    <a href="#" class="flex items-center pb-4 border-b border-b-gray-200">
-        <span class="text-2xl font-bold text-white ml-3">SIBSS</span>
-    </a>
-    <ul class="mt-4">
-      <% if (userRole !== 'mahasiswa') { %>
-        <li class="mb-1 group">
-          <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle"style="color:white;">
-            <i class="ri-graduation-cap-line mr-3 text-lg"></i>
-            <span class="text-sm">BSS</span>
-            <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-          </a>
-          <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-            <li class="mb-4">
-              <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Daftar Pengajuan</a>
-            </li> 
-            <li class="mb-4">
-              <a href="/statusMhs" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
-            </li> 
-            <li class="mb-4">
-              <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat Mahasiswa</a>
-            </li> 
-          </ul>
-        </li>
-      <% } %>
-      <% if (userRole === 'mahasiswa') { %>
-        <li class="mb-1 group">
-          <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle">
-            <i class="ri-graduation-cap-line mr-3 text-lg"></i>
-            <span class="text-sm">BSS</span>
-            <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-          </a>
-          <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-            <li class="mb-4">
-              <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
-            </li> 
-            <li class="mb-4">
-              <a href="/statusdaftarmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
-            </li> 
-            <li class="mb-4">
-              <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
-            </li> 
-            <li class="mb-4">
-              <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
-            </li> 
-            <li class="mb-4">
-              <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
-            </li> 
-            <li class="mb-4">
-              <a href="/suratkeputusan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Surat Keputusan</a>
-            </li> 
-          </ul>
-        </li>
-      <% } %>
-      <a href="/logout" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
-        <i class="ri-logout-box-line mr-3 text-lg"></i>
-        <span class="text-sm">logout</span>
-      </a>
-    </ul>
+<body>
+    <body class="text-gray-800 font-inter"></body>
     
-</div>
-<div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
-<!-- end: Sidebar -->
-
+    <!-- start: Sidebar -->
+    <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
+        <a href="#" class="flex items-center pb-4 border-b border-b-gray-200">
+            <span class="text-2xl font-bold text-white ml-3">SIBSS</span>
+        </a>
+        <ul class="mt-4">
+          <% if (userRole !== 'mahasiswa') { %>
+            <li class="mb-1 group">
+              <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle"style="color:white;">
+                <i class="ri-graduation-cap-line mr-3 text-lg"></i>
+                <span class="text-sm">BSS</span>
+                <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+              </a>
+              <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                <li class="mb-4">
+                  <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Daftar Pengajuan</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/statusdaftarmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat Mahasiswa</a>
+                </li> 
+              </ul>
+            </li>
+          <% } %>
+          <% if (userRole === 'mahasiswa') { %>
+            <li class="mb-1 group">
+              <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle">
+                <i class="ri-graduation-cap-line mr-3 text-lg"></i>
+                <span class="text-sm">BSS</span>
+                <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+              </a>
+              <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                <li class="mb-4">
+                  <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/suratkeputusan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Surat Keputusan</a>
+                </li> 
+              </ul>
+            </li>
+          <% } %>
+          <a href="/logout" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
+            <i class="ri-logout-box-line mr-3 text-lg"></i>
+            <span class="text-sm">logout</span>
+          </a>
+        </ul>
+        
+    </div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
+    <!-- end: Sidebar -->
+     
     <!-- start: Main -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
         <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
@@ -226,49 +228,57 @@
             </ul>
         </div>
         <!-- content -->
-        <div class="wrap-status" style="padding:30px;width: 60%;">
-          <div class="bio">
-            <div class="nama">
-              <span>Nama</span>
-              <span>: <%= user.name %></span>
+        <div class="p-8 w-11/12 mx-auto">
+          <div class="text-2xl font-bold mb-4">Daftar Mahasiswa yang Melakukan BSS</div>
+          <div class="bg-white shadow-lg rounded-lg p-6 overflow-x-auto">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-2">
+                <label for="entries" class="text-sm">Show</label>
+                <select id="entries" class="border rounded px-2 py-1 text-sm">
+                  <option>7</option>
+                  <option>10</option>
+                  <option>25</option>
+                  <option>50</option>
+                </select>
+                <span class="text-sm">Entries</span>
+              </div>
+              <div class="relative">
+                <input type="text" placeholder="Silahkan isikan Keyword" class="border rounded px-2 py-1 text-sm">
+                <button class="absolute right-1 top-1">
+                  <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.243 4.243-1.414 1.414-4.243-4.243zm-5.9-5.32a6 6 0 1112 0 6 6 0 01-12 0z" clip-rule="evenodd"/>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div class="nim">
-              <span>NIM</span>
-              <span>: <%= user.nim %></span> <!-- Anda perlu menyesuaikan dengan properti yang sesuai dari objek user -->
-            </div>
-          </div>
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>ID Pengajuan</th>
-                <th>Ketua Program Studi</th>
-                <th>Wakil Dekan 1</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% approvals.forEach(approval => { %>
+            <table class="min-w-full bg-white">
+              <thead class="bg-gray-100">
                 <tr>
-                  <td><%= approval.pengajuanId %></td>
-                  <td>
-                    <% if (approval.statusApprovalKaprodi) { %>
-                      <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui</span>
-                    <% } else { %>
-                      <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Belum Disetujui</span>
-                    <% } %>
-                  </td>
-                  <td>
-                    <% if (approval.statusApprovalWadek) { %>
-                      <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui</span>
-                    <% } else { %>
-                      <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Belum Disetujui</span>
-                    <% } %>
-                  </td>
+                  <th class="border px-4 py-2">No</th>
+                  <th class="border px-4 py-2">Tanggal</th>
+                  <th class="border px-4 py-2">Mahasiswa</th>
+                  <th class="border px-4 py-2">NIM</th>
+                  <th class="border px-4 py-2">Status</th>
+                  <th class="border px-4 py-2">Berkas</th>
                 </tr>
-              <% }) %>
-            </tbody>            
-          </table>
+              </thead>
+              <tbody>
+                <% 
+                  var no = 1
+                   pengajuans.forEach(pengajuan => { %>
+                  <tr>
+                    <td class="border px-4 py-2"><%= no++ %></td>
+                    <td class="border px-4 py-2"><%= pengajuan.createdAt %></td>
+                    <td class="border px-4 py-2"><%= pengajuan.nama_lengkap %></td>
+                    <td class="border px-4 py-2"><%= pengajuan.nim %></td>
+                    <td class="border px-4 py-2"></td>
+                    <td class="border px-4 py-2"><a href="/detail/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Detail</a></td>
+                  </tr>
+                <%})%>
+              </tbody>
+            </table>
+          </div>
         </div>
-        
     <!-- end content -->
     </main>
     <!-- end: Main -->
