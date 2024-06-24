@@ -243,3 +243,135 @@ exports.createPermohonanBss = async (req, res) => {
     res.status(500).json({ message: 'Terjadi kesalahan pada server', error });
   }
 };
+
+exports.showpPeriodeBSS = async (req, res) => {
+  try {
+    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
+    const userRole = user.role; // Mendapatkan role user
+
+    // Ambil pengajuan yang terhubung dengan userId
+    const pengajuans = await db.Pengajuan.findAll({
+      where: { userId: userId }
+    });
+
+    if (!pengajuans) {
+      return res.status(404).send('Data pengajuan tidak ditemukan');
+    } else {
+      var pengajuanss = new Array();
+      pengajuans.forEach(pengajuan => {
+
+        var d = new Date();
+        const year = d.getFullYear();
+        const month = d.getMonth();
+        // var lastDay = new Date(year, month + 1, 0).getDate();
+        var status = "";
+        var periodesemester = "";
+        const monthcreated = pengajuan.createdAt.toJSON().substring(5, 7);
+        if (parseInt(monthcreated) <= 6) {
+          periodesemester = year + "-" + "Ganjil";
+          var lastDay = new Date(year, 6, 0).getDate();
+          var tglberenti = year + "-" + "06-" + lastDay;
+
+          var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
+          var tanggal2 = new moment(tglberenti);
+          var selisih = tanggal2.diff(tanggal1, 'days');
+          if (selisih < 0) {
+            status = "BSS Berakhir";
+          } else {
+            status = "On Progress";
+          }
+        } else {
+          periodesemester = year + "-" + "Genap";
+          var lastDay = new Date(year, 12, 0).getDate();
+          var tglberenti = year + "-" + "12-" + lastDay;
+          var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
+          var tanggal2 = new moment(tglberenti);
+          var selisih = tanggal2.diff(tanggal1, 'days');
+          if (selisih < 0) {
+            status = "BSS Berakhir";
+          } else {
+            status = "On Progress";
+          }
+        }
+
+        var obj = { id: pengajuan.id, createdAt: pengajuan.createdAt,  status: status, periodesemester: periodesemester, skbss: "-"};
+        pengajuanss.push(obj);
+      });
+    }
+
+    // // Ambil dokumen_pendukung dari pengajuan
+    // const dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : [];
+
+    // Render halaman panduan dengan data dokumenPendukung
+    res.render('user/periodeBSS', {
+      title: 'Periode BSS',
+      pengajuans: pengajuanss,
+      userRole
+    });
+  } catch (error) {
+    console.error('Error fetching supporting documents:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+exports.showpStatusDaftarMahasiswa = async (req, res) => {
+  try {
+    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
+    const userRole = user.role; // Mendapatkan role user
+
+    // Ambil pengajuan yang terhubung
+    const pengajuans = await db.Pengajuan.findAll();
+
+    if (!pengajuans) {
+      return res.status(404).send('Data pengajuan tidak ditemukan');
+    }
+
+    // // Ambil dokumen_pendukung dari pengajuan
+    // const dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : [];
+
+    // Render halaman panduan dengan data dokumenPendukung
+    res.render('user/statusdaftarmahasiswa', {
+      title: 'Status Periode Mahasiswa',
+      pengajuans: pengajuans,
+      userRole
+    });
+  } catch (error) {
+    console.error('Error fetching supporting documents:', error);
+    res.status(500).send('Internal Server Error');
+  }
+
+
+};
+
+
+exports.detailPengajuan = async (req, res) => {
+  try {
+    // const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
+    const userRole = user.role; // Mendapatkan role user
+
+    // Ambil pengajuan yang terhubung dengan userId
+    const pengajuans = await db.Pengajuan.findAll({
+      where: { id: req.params.id }
+    });
+
+    if (!pengajuans) {
+      return res.status(404).send('Data pengajuan tidak ditemukan');
+    } 
+
+    // // Ambil dokumen_pendukung dari pengajuan
+    // const dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : [];
+
+    // Render halaman panduan dengan data dokumenPendukung
+    res.render('user/detailpengajuan', {
+      title: 'Detail Pengajuan',
+      pengajuans: pengajuans,
+      userRole
+    });
+  } catch (error) {
+    console.error('Error fetching supporting documents:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
