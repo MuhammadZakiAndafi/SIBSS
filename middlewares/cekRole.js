@@ -4,8 +4,8 @@ function cekRole(req, res, next) {
   }
 
   const userRole = req.session.user.role;
-  const allowedRoutesForKaprodiWadek = ['/daftarPengajuan', '/approval'];
-  const allowedRoutesForMahasiswa = ['/pendaftaranBss', '/status', '/riwayatpengajuan', '/panduan', '/suratkeputusan'];
+  const allowedRoutesForKaprodiWadek = ['/daftarPengajuan', '/riwayatpengajuan','/approval','/statusdaftarmahasiswa'];
+  const allowedRoutesForMahasiswa = ['/pendaftaranBss', '/status', '/riwayatpengajuanmahasiswa', '/periodeBSS' ,'/detailpengajuan/:id', '/panduan', '/suratkeputusan'];
   
   // Allow Kaprodi and Wadek to access detail routes
   const isDetailRoute = req.path.startsWith('/detail/');

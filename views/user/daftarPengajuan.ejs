@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/template.css">
     <link rel="stylesheet" href="./css/status.css">
-    <title>Status BSS</title>
+    <title>Daftar Pengajuan</title>
 </head>
 <body class="text-gray-800 font-inter">
     
-    <!-- start: Sidebar -->
-    <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
+     <!-- start: Sidebar -->
+     <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
       <a href="#" class="flex items-center pb-4 border-b border-b-gray-200">
         <img src="/img/logounand.png" alt="SIBSS Logo" class="h-8 w-9 mr-3" style="padding-left: 10px;" > <!-- Adjust the path, alt text, and size as needed -->
         <span class="text-2xl font-bold text-white" style="color: #0CBE5A; padding-left: 10px;">SIBSS</span>
     </a>
       <ul class="mt-4">
         <% if (userRole !== 'mahasiswa') { %>
+<<<<<<< HEAD
           <a href="/daftarPengajuan" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
             <i class="ri-graduation-cap-line mr-3 text-lg"></i>
             <span class="text-sm">Daftar Pengajuan</span>
@@ -31,6 +32,26 @@
             <i class="ri-graduation-cap-line mr-3 text-lg"></i>
             <span class="text-sm">Status Daftar Mahasiswa</span>
           </a>
+=======
+          <li class="mb-1 group">
+            <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle"style="color:white;">
+              <i class="ri-graduation-cap-line mr-3 text-lg"></i>
+              <span class="text-sm">BSS</span>
+              <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+            </a>
+            <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+              <li class="mb-4">
+                <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Daftar Pengajuan</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/statusdaftarmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat Mahasiswa</a>
+              </li> 
+            </ul>
+          </li>
+>>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
         <% } %>
         <% if (userRole === 'mahasiswa') { %>
           <li class="mb-1 group">
@@ -48,10 +69,17 @@
               </li>
               <li class="mb-4">
                 <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
+<<<<<<< HEAD
               </li>  
               <!-- <li class="mb-4">
                 <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
               </li>  -->
+=======
+              </li> 
+              <li class="mb-4">
+                <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+              </li> 
+>>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
               <li class="mb-4">
                 <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
               </li> 
@@ -209,7 +237,7 @@
                     </button>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                            <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                         </li>
                         <li>
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
@@ -270,8 +298,11 @@
                   <td class="border px-4 py-2"><%= pengajuan.alasan_berhenti %></td>
                   <td class="border px-4 py-2"><%= pengajuan.no_hp %></td>
                   <td class="border px-4 py-2">
-                    <a href="/detail/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Detail</a>
-                  </td>
+                          <a href="/detail/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Detail</a>
+                          <% if (userRole === 'wadek') { %>
+                            <a href="/generate-pdf/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">SendSK</a>
+                          <% } %>
+                    </td>
                 </tr>
                 <% }) %>
               </tbody>

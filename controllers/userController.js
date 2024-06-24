@@ -48,3 +48,32 @@ exports.logout = (req, res) => {
     res.redirect('/login');
   });
 };
+
+exports.showProfile = async (req, res) => {
+  const userRole = userlogin.role; // Mendapatkan role user
+    // Render halaman status dengan data approvals dan pengguna yang sedang login
+    res.render('user/profile', {
+      title: 'Profile',
+      user: req.session.user, // Data pengguna yang sedang login
+      user: user,
+      userRole
+    });
+  };
+  
+exports.profile = async (req, res) => {
+   // Ambil data pengguna yang sedang login
+   const userId = req.session.user.id;
+
+   // Ambil pengajuanId dari model Pengajuan berdasarkan userId
+   try {
+    const user = await db.User.findOne({
+      where: { userId: userId },
+      include: [{ model: db.User }]
+    }); 
+    req.session.user = user;
+    res.redirect('/profile');
+  }  catch (error) {
+    console.error('Error fetching approvals:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
