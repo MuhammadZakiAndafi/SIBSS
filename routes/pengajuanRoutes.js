@@ -20,5 +20,9 @@ router.get('/status', cekRole,ensureAuthenticated,pengajuanController.showStatus
 router.get('/riwayatpengajuan', cekRole,ensureAuthenticated,pengajuanController.showRiwayat);
 router.get('/panduan', cekRole,ensureAuthenticated,pengajuanController.showPanduan);
 router.post('/pendaftaranBss', upload.single('dokumen_pendukung'), pengajuanController.createPermohonanBss);
+router.get('/editPengajuan/:id', pengajuanController.editPengajuan);
+router.post('/updatePengajuan/:id', upload.single('dokumen_pendukung'), pengajuanController.updatePengajuan);
+router.delete('/hapusPengajuan/:id', pengajuanController.hapusPengajuan);
+
 
 module.exports = router;

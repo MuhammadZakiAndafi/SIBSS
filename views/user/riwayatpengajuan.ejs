@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./css/template.css">
     <link rel="stylesheet" href="./css/status.css">
-    <title>Status BSS</title>
+    <link rel="stylesheet" href="./output.css">
+    <title>Riwayat Pengajuan</title>
 </head>
 <body class="text-gray-800 font-inter">
     
@@ -38,7 +39,7 @@
                 <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
               </li> 
               <li class="mb-4">
-                <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+                <a href="/ " class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
               </li> 
               <li class="mb-4">
                 <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
@@ -237,80 +238,49 @@
               <thead class="bg-gray-100">
                 <tr>
                   <th class="border px-4 py-2">No</th>
-                  <th class="border px-4 py-2">ID Pendaftaran</th>
-                  <th class="border px-4 py-2">Tanggal Pendaftaran</th>
-                  <th class="border px-4 py-2">Kendala Berhenti</th>
-                  <th class="border px-4 py-2">Status</th>
-                  <th class="border px-4 py-2">Tanggal Berhenti</th>
-                  <th class="border px-4 py-2">Periode Semester</th>
-                  <th class="border px-4 py-2">Batas Periode</th>
-                  <th class="border px-4 py-2">Status Pemulihan</th>
+                  <th class="border px-4 py-2">NIM</th>
+                  <th class="border px-4 py-2">Nama Lengkap</th>
+                  <th class="border px-4 py-2">No Hp</th>
+                  <th class="border px-4 py-2">Fakultas</th>
+                  <th class="border px-4 py-2">Departemen</th>
+                  <th class="border px-4 py-2">Alasan berhenti</th>
+                  <th class="border px-4 py-2">Lampiran</th>
+                  <th class="border px-4 py-2">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="border px-4 py-2">1</td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                </tr>
-                <tr>
-                  <td class="border px-4 py-2">2</td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                </tr>
-                <tr>
-                  <td class="border px-4 py-2">3</td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                </tr>
-                <tr>
-                  <td class="border px-4 py-2">4</td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                </tr>
-                <tr>
-                  <td class="border px-4 py-2">5</td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                  <td class="border px-4 py-2"></td>
-                </tr>
+                <% riwayatPengajuan.forEach((item, index) => { %>
+                  <tr>
+                    <td class="border px-4 py-2"><%= index + 1 %></td>
+                    <td class="border px-4 py-2"><%= item.nim %></td>
+                    <td class="border px-4 py-2"><%= item.nama_lengkap %></td>
+                    <td class="border px-4 py-2"><%= item.no_hp %></td>
+                    <td class="border px-4 py-2"><%= item.fakultas %></td>
+                    <td class="border px-4 py-2"><%= item.departement %></td>
+                    <td class="border px-4 py-2"><%= item.alasan_berhenti %></td>
+                    <td class="border px-4 py-2">
+                          <a href="/uploads/<%= item.dokumen_pendukung %>" style="background-color:rgb(96, 207, 181);" download class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Unduh
+                          </a> 
+                    </td>
+                    <td class="border px-4 py-2 ">
+                      <div class="flex justify-center items-center">
+                        <a href="/editPengajuan/<%= item.id %>" style="background-color:rgb(0, 149, 255);" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                    
+                  </tr>
+                <% }) %>
               </tbody>
             </table>
+            
           </div>
         </div>
     <!-- end content -->
     </main>
     <!-- end: Main -->
-
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>

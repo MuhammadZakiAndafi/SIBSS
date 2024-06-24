@@ -14,13 +14,22 @@
     <!-- start: Sidebar -->
     <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
       <a href="#" class="flex items-center pb-4 border-b border-b-gray-200">
-          <span class="text-2xl font-bold text-white ml-3">SIBSS</span>
-      </a>
+        <img src="/img/logounand.png" alt="SIBSS Logo" class="h-8 w-9 mr-3" style="padding-left: 10px;" > <!-- Adjust the path, alt text, and size as needed -->
+        <span class="text-2xl font-bold text-white" style="color: #0CBE5A; padding-left: 10px;">SIBSS</span>
+    </a>
       <ul class="mt-4">
         <% if (userRole !== 'mahasiswa') { %>
           <a href="/daftarPengajuan" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
             <i class="ri-graduation-cap-line mr-3 text-lg"></i>
             <span class="text-sm">Daftar Pengajuan</span>
+          </a>
+          <a href="/riwayatpengajuan" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
+            <i class="ri-graduation-cap-line mr-3 text-lg"></i>
+            <span class="text-sm">Riwayat Pengajuan</span>
+          </a>
+          <a href="/statusdaftarmahasiswa" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
+            <i class="ri-graduation-cap-line mr-3 text-lg"></i>
+            <span class="text-sm">Status Daftar Mahasiswa</span>
           </a>
         <% } %>
         <% if (userRole === 'mahasiswa') { %>
@@ -36,10 +45,13 @@
               </li> 
               <li class="mb-4">
                 <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
-              </li> 
+              </li>
               <li class="mb-4">
+                <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
+              </li>  
+              <!-- <li class="mb-4">
                 <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
-              </li> 
+              </li>  -->
               <li class="mb-4">
                 <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
               </li> 
@@ -243,7 +255,7 @@
                   <th class="border px-4 py-2">Departement</th>
                   <th class="border px-4 py-2">Alasan Berhenti</th>
                   <th class="border px-4 py-2">Nomor HP</th>
-                  <th class="border px-4 py-2">Aksi</th>
+                  <th class="border px-4 py-2">Berkas</th>
                 </tr>
               </thead>
               <tbody>
