@@ -7,66 +7,67 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <nav class="relative w-full bg-white-900 shadow-lg py-3 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-6 mx-0" aria-label="Global">
-      <!-- Logo Section -->
-      <div class="flex items-center">
-          <img src="img/logounand.png" style="width: 50px; height: 50px;">
-          <p class="ml-3 font-bold" style="color: #0CBE5A; font-size: 30px;">SIBSS</p>
-      </div>
+  <nav class="w-full shadow-lg py-2 ps-5 pe-2 md:flex bg-white md:items-center md:justify-between md:py-3 mx-0 fixed top-0 z-50" aria-label="Global">
+    <!-- Logo Section -->
+    <div class="flex items-center">
+        <img src="img/logounand.png" style="width: 40px; height: 40px;">
+        <p class="ml-3 font-bold" style="color: #0CBE5A; font-size: 30px;">SIBSS</p>
+    </div>
   
-      <!-- Menu Toggle (For Mobile) -->
-      <div class="md:hidden">
-          <button type="button" class="hs-collapse-toggle size-8 flex justify-center items-center text-sm font-semibold rounded-full bg-neutral-800 text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-collapse" aria-controls="navbar-collapse" aria-label="Toggle navigation">
-              <svg class="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="3" x2="21" y1="6" y2="6"></line>
-                  <line x1="3" x2="21" y1="12" y2="12"></line>
-                  <line x1="3" x2="21" y1="18" y2="18"></line>
-              </svg>
-              <svg class="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 6 6 18"></path>
-                  <path d="m6 6 12 12"></path>
-              </svg>
-          </button>
-      </div>
+    <!-- Menu Toggle (For Mobile) -->
+    <div class="md:hidden">
+        <button type="button" class="hs-collapse-toggle size-8 flex justify-center items-center text-sm font-semibold rounded-full bg-neutral-800 text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-collapse" aria-controls="navbar-collapse" aria-label="Toggle navigation">
+            <svg class="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" x2="21" y1="6" y2="6"></line>
+                <line x1="3" x2="21" y1="12" y2="12"></line>
+                <line x1="3" x2="21" y1="18" y2="18"></line>
+            </svg>
+            <svg class="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+            </svg>
+        </button>
+    </div>
   
-      <!-- Collapse -->
-      <div id="navbar-collapse" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block bg-fixed top">
-          <div class="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-7">
-              <a class="py-3 ps-px sm:px-3 md:py-4 text-lg text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/dashboard" aria-current="page">Home</a>
-              <a class="py-3 ps-px sm:px-3 md:py-4 text-lg text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/login">Login</a>
-              <a class="py-3 ps-px sm:px-3 md:py-4 text-lg text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/register">Register</a>
-          </div>
-      </div>
-      <!-- End Collapse -->
+    <!-- Collapse -->
+    <div id="navbar-collapse" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block bg-fixed top">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-7">
+            <a class="py-3 ps-px sm:px-3 md:py-4 text-sm text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/dashboard" aria-current="page">Home</a>
+            <a class="py-3 ps-px sm:px-3 md:py-4 text-sm text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/login">Login</a>
+            <a class="py-3 ps-px sm:px-3 md:py-4 text-sm text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/register">Register</a>
+        </div>
+    </div>
+    <!-- End Collapse -->
   </nav>
+  
   
   
     <main id="content" class="w-100 mx-1 p-6">
   
-      <div class="mt-5">
+      <div class="mt-5 ">
         <!-- Form -->
         <form>
           <div class="grid grid-cols-6 gap-y-4">
-            <div class="col-span-3 p-6">
+            <div class="col-span-3 p-6 mt-16">
               <!-- Form Group -->
               <div>
   
                 <div class="text-left mt-28">
-                  <h1 class="block text-5xl font-bold text-gray-800 dark:text-white mb-4">Sistem Informasi</h1>
-                  <h1 class="block text-5xl font-bold text-gray-800 dark:text-white mb-4">Layanan Berhenti Studi</h1>
-                  <h1 class="block text-5xl font-bold text-gray-800 dark:text-white mb-4">Sementara (BSS)</h1>
-                  <h1 class="block text-2xl italic text-gray-800 dark:text-white mb-2">Sistem ini diperuntukan untuk mahasiswa Universitas Andalas yang</h1>
-                  <h1 class="block text-2xl italic text-gray-800 dark:text-white">mengalami kendala dalam studi dan ingin mengajukan Berhenti Studi Sementara (BSS) dengan layanan yang lebih efisien.</h1>
+                  <h1 class="block text-4xl font-bold text-gray-800 dark:text-white mb-4">Sistem Informasi</h1>
+                  <h1 class="block text-4xl font-bold text-gray-800 dark:text-white mb-4">Layanan Berhenti Studi</h1>
+                  <h1 class="block text-4xl font-bold text-gray-800 dark:text-white mb-4">Sementara (BSS)</h1>
+                  <h1 class="block text-xl italic text-gray-800 dark:text-white mb-2">Sistem ini diperuntukan untuk mahasiswa Universitas Andalas yang</h1>
+                  <h1 class="block text-xl italic text-gray-800 dark:text-white">mengalami kendala dalam studi dan ingin mengajukan Berhenti Studi Sementara (BSS) dengan layanan yang lebih efisien.</h1>
                 </div>
                 
               </div>
             </div>
-            <div class="col-span-3">
+            <div class="col-span-3 mt-20">
               <img src="/img/unand.jpg" alt="">
             </div>
           </div>
         
-        <div class="col-span-6">
+        <div class="col-span-6 mt-10">
           <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
             <!-- Title -->
             <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
