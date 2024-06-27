@@ -240,7 +240,7 @@
         </div>
 
         <!-- content -->
-        <div class="p-8 w-11/12 mx-auto">
+        <div class="container m-5 mt-10">
           <h1 class="text-3xl font-bold mb-8"><%= title %></h1>
           <div class="bg-white shadow-md rounded-lg">
             <% if (pengajuanList.length === 0) { %>
@@ -254,15 +254,41 @@
                         <p class="text-lg font-semibold"><%= pengajuan.nama_lengkap %> (<%= pengajuan.nim %>)</p>
                         <p class="text-gray-600 mb-2"><%= pengajuan.dataPengajuan %></p>
                         <% if (pengajuan.Approvals && pengajuan.Approvals.length > 0) { %>
-                          <div class="flex items-center justify-between bg-gray-100 p-4 rounded-md mb-2 ">
-                            <div>
-                              <p class="text-sm text-gray-600">Status Kaprodi: <span class="font-semibold <%= pengajuan.Approvals[0].statusApprovalKaprodi === 'Disetujui' ? 'text-green-600' : (pengajuan.Approvals[0].statusApprovalKaprodi === 'Ditolak' ? 'text-red-600' : 'text-yellow-600') %>"><%= pengajuan.Approvals[0].statusApprovalKaprodi %></span></p>
-                              <p class="text-sm text-gray-600">Status Wadek: <span class="font-semibold <%= pengajuan.Approvals[0].statusApprovalWadek === 'Disetujui' ? 'text-green-600' : (pengajuan.Approvals[0].statusApprovalWadek === 'Ditolak' ? 'text-red-600' : 'text-yellow-600') %>"><%= pengajuan.Approvals[0].statusApprovalWadek %></span></p>
+                          <div class="bg-gray-100 rounded-lg p-3">
+                            <div class="mb-4">
+                              <p class="text-sm text-gray-600">Status Kaprodi: 
+                                <span class="font-semibold <%= pengajuan.Approvals[0].statusApprovalKaprodi === 'Disetujui' ? 'text-green-600' : (pengajuan.Approvals[0].statusApprovalKaprodi === 'Ditolak' ? 'text-red-600' : 'text-yellow-600') %>">
+                                  <%= pengajuan.Approvals[0].statusApprovalKaprodi %>
+                                </span>
+                              </p>
+                              <% if (pengajuan.Approvals[0].statusApprovalKaprodi === 'Ditolak') { %>
+                                <div class="relative">
+                                  <button class="mt-2 text-sm text-blue-600 underline italic dropdown-toggle" onclick="toggleDropdown('kaprodi-<%= pengajuan.id %>')">
+                                    Lihat alasan ditolak
+                                  </button>
+                                  <div id="kaprodi-<%= pengajuan.id %>" class="dropdown-content hidden mt-2 p-2 bg-white border rounded shadow-md">
+                                    <p class="text-sm text-red-600"><%= pengajuan.Approvals[0].alasanRejectKaprodi %></p>
+                                  </div>
+                                </div>
+                              <% } %>
                             </div>
-                            <div class="ml-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 cursor-pointer hover:text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 6a1 1 0 012 0v5a1 1 0 11-2 0V6zm1 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                              </svg>
+                            
+                            <div>
+                              <p class="text-sm text-gray-600">Status Wadek: 
+                                <span class="font-semibold <%= pengajuan.Approvals[0].statusApprovalWadek === 'Disetujui' ? 'text-green-600' : (pengajuan.Approvals[0].statusApprovalWadek === 'Ditolak' ? 'text-red-600' : 'text-yellow-600') %>">
+                                  <%= pengajuan.Approvals[0].statusApprovalWadek %>
+                                </span>
+                              </p>
+                              <% if (pengajuan.Approvals[0].statusApprovalWadek === 'Ditolak') { %>
+                                <div class="relative">
+                                  <button class="mt-2 text-sm text-blue-600 italic underline dropdown-toggle" onclick="toggleDropdown('wadek-<%= pengajuan.id %>')">
+                                    Lihat alasan ditolak
+                                  </button>
+                                  <div id="wadek-<%= pengajuan.id %>" class="dropdown-content hidden mt-2 p-2 bg-white border rounded shadow-md">
+                                    <p class="text-sm text-red-600"><%= pengajuan.Approvals[0].alasanRejectWadek %></p>
+                                  </div>
+                                </div>
+                              <% } %>
                             </div>
                           </div>
                         <% } else { %>
@@ -277,8 +303,19 @@
           </div>
         </div>
         
+        <script>
+          function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            dropdown.classList.toggle('hidden');
+          }
+        </script>
         
-        
+        <script>
+          function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            dropdown.classList.toggle('hidden');
+          }
+        </script>
     <!-- end content -->
     </main>
     <!-- end: Main -->
