@@ -2,52 +2,6 @@ const bcrypt = require('bcryptjs');
 const db = require('../models');
 const { Op } = require('sequelize'); 
 
-exports.ubahPassword = async (req, res) => {
-  const userId = req.session.user.id; 
-  const userRole = req.session.user.role; 
-  res.render('user/ubahpassword', {
-     title: 'Ubah password',
-     userRole
-     });
-};
-exports.updatePassword = async (req, res) => {
-const userRole = req.session.user.role;
-const { current_password, new_password, confirm_password } = req.body;
-
-if (new_password !== confirm_password) {
-  req.flash('error', 'Kata sandi baru dan konfirmasi kata sandi tidak cocok');
-  return res.redirect('/ubahpassword');
-}
-
-try {
-  const userId = req.session.user.id;
-  const user = await db.User.findByPk(userId);
-
-  if (!user) {
-    req.flash('error', 'Pengguna tidak ditemukan');
-    return res.redirect('/ubahpassword');
-  }
-
-  const isMatch = await bcrypt.compare(current_password, user.password);
-
-  if (!isMatch) {
-    req.flash('error', 'Kata sandi lama salah');
-    return res.redirect('/ubahpassword');
-  }
-
-  const hashedPassword = await bcrypt.hash(new_password, 10);
-  user.password = hashedPassword;
-  await user.save();
-
-  req.flash('success', 'Kata sandi berhasil diperbarui');
-  res.redirect('/pendaftaranBSS');
-} catch (error) {
-  console.error('Error updating password:', error);
-  req.flash('error', 'Gagal memperbarui kata sandi');
-  res.redirect('/ubahpassword');
-}
-};
-
 exports.showNotifications = async (req, res) => {
   try {
     const userRole = req.session.user.role;
@@ -144,7 +98,7 @@ exports.showProfile = async (req, res) => {
       userRole
     }); 
   };
-  
+
 exports.profile = async (req, res) => {
    // Ambil data pengguna yang sedang login
    const userId = req.session.user.id;

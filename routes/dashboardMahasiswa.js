@@ -26,16 +26,6 @@ router.get('/mahasiswa/profile', verifyToken, function(req, res, next) {
   res.render('mahasiswa/profile', { userId,userEmail,userName,userroleId,userRole  });
 });
 
-router.get('/mahasiswa/ubahPassword',verifyToken, function(req, res, next) {
-  const userId = req.userId;
-  const userEmail = req.userEmail;
-  const userName = req.userName;
-  const userroleId = req.userroleId;
-  const userRole = req.userRole;
-
-  res.render('mahasiswa/ubahPassword', { userId,userEmail,userName,userroleId,userRole  });
-});
-
 router.post('/change-password', verifyToken, async (req, res) => {
   try {
     await changePassword(req, res);
