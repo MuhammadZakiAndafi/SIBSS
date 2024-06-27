@@ -13,5 +13,7 @@ router.get('/profile', cekRole,ensureAuthenticated, userController.showProfile);
 router.post('/profile', userController.profile);
 router.post('/updateProfile', userController.updateProfile);
 router.get('/notifications', ensureAuthenticated,userController.showNotifications);
+router.post('/updatePassword', userController.updatePassword);
+router.get('/ubahpassword',  ensureAuthenticated,userController.ubahPassword);
 module.exports = router;
  
