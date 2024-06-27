@@ -435,23 +435,19 @@ exports.showpPeriodeBSS = async (req, res) => {
 
 exports.showpStatusDaftarMahasiswa = async (req, res) => {
   try {
-    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-    const user = req.session.user; // Asumsikan req.session.user menyimpan informasi user yang sedang login
-    const userRole = user.role; // Mendapatkan role user
+    const userId = req.session.user.id;
+    const user = req.session.user;
+    const userRole = user.role;
 
-    // Ambil pengajuan yang terhubung dengan userId dari model Pengajuan
     const pengajuans = await db.Pengajuan.findAll({
-      where: { userId: userId },
       include: [
         {
           model: db.Approval,
-          required: false // Gunakan required: false agar data Pengajuan tetap terambil meskipun tidak ada Approval
+          required: false
         }
       ]
     });
 
-
-    // Render halaman statusdaftarmahasiswa dengan data pengajuans
     res.render('user/statusdaftarmahasiswa', {
       title: 'Status Periode Mahasiswa',
       pengajuans: pengajuans,
