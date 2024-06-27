@@ -270,19 +270,23 @@
                   <% pengajuans.forEach((pengajuan, index) => { %>
                     <tr>
                       <td class="border px-4 py-2"><%= index + 1 %></td>
-                      <td class="border px-4 py-2"><%= pengajuan.createdAt %></td>
+                      <td class="border px-4 py-2"><%= new Date(pengajuan.createdAt).toLocaleDateString() %></td>
                       <td class="border px-4 py-2"><%= pengajuan.nama_lengkap %></td>
                       <td class="border px-4 py-2"><%= pengajuan.nim %></td>
-                      <td class="border px-4 py-2">
+                      <td class="border px-4 py-2 text-center">
                         <% if (pengajuan.Approvals && pengajuan.Approvals.length > 0) { %>
-                          <% const kaprodiApproval = pengajuan.Approvals.find(approval => approval.statusApprovalKaprodi !== null); %>
-                          <% const wadekApproval = pengajuan.Approvals.find(approval => approval.statusApprovalWadek !== null); %>
-                          <% if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === true && wadekApproval && wadekApproval.statusApprovalWadek === true) { %>
+                          <% const kaprodiApproval = pengajuan.Approvals.find(approval => approval.statusApprovalKaprodi !== 'Diproses'); %>
+                          <% const wadekApproval = pengajuan.Approvals.find(approval => approval.statusApprovalWadek !== 'Diproses'); %>
+                          <% if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === 'Disetujui' && wadekApproval && wadekApproval.statusApprovalWadek === 'Disetujui') { %>
                             <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Verifikasi</span>
-                          <% } else if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === true) { %>
+                          <% } else if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === 'Disetujui') { %>
                             <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui Kaprodi</span>
-                          <% } else if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === false) { %>
+                          <% } else if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === 'Ditolak' && wadekApproval && wadekApproval.statusApprovalWadek === 'Ditolak') { %>
+                            <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Ditolak Kaprodi & Wadek</span>
+                          <% } else if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === 'Ditolak') { %>
                             <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Ditolak Kaprodi</span>
+                          <% } else if (wadekApproval && wadekApproval.statusApprovalWadek === 'Ditolak') { %>
+                            <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Ditolak Wadek</span>
                           <% } else { %>
                             <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">Proses</span>
                           <% } %>
@@ -290,7 +294,7 @@
                           <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">Proses</span>
                         <% } %>
                       </td>
-                      <td class="border px-4 py-2">
+                      <td class="border px-4 py-2 text-center">
                         <% if (pengajuan.dokumen_pendukung) { %>
                           <a href="/uploads/<%= pengajuan.dokumen_pendukung %>" download class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Unduh</a>
                         <% } else { %>
@@ -308,9 +312,13 @@
             </table>
             
             
+            
+            
           </div>
         </div>
     <!-- end content -->
+    </main>
+    <!-- end: Main -->
     </main>
     <!-- end: Main -->
 
