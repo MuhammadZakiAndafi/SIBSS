@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="font-inter">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav class="relative w-full bg-white-900 shadow-lg py-3 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-6 mx-0" aria-label="Global">
+      <!-- Logo Section -->
+      <div class="flex items-center">
+          <img src="img/logounand.png" style="width: 50px; height: 50px;">
+          <p class="ml-3 font-bold" style="color: #0CBE5A; font-size: 30px;">SIBSS</p>
+      </div>
+  
+      <!-- Menu Toggle (For Mobile) -->
+      <div class="md:hidden">
+          <button type="button" class="hs-collapse-toggle size-8 flex justify-center items-center text-sm font-semibold rounded-full bg-neutral-800 text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-collapse" aria-controls="navbar-collapse" aria-label="Toggle navigation">
+              <svg class="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" x2="21" y1="6" y2="6"></line>
+                  <line x1="3" x2="21" y1="12" y2="12"></line>
+                  <line x1="3" x2="21" y1="18" y2="18"></line>
+              </svg>
+              <svg class="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+              </svg>
+          </button>
+      </div>
+  
+      <!-- Collapse -->
+      <div id="navbar-collapse" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block bg-fixed top">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-7">
+              <a class="py-3 ps-px sm:px-3 md:py-4 text-lg text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/dashboard" aria-current="page">Home</a>
+              <a class="py-3 ps-px sm:px-3 md:py-4 text-lg text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/login">Login</a>
+              <a class="py-3 ps-px sm:px-3 md:py-4 text-lg text-black hover:text-blue-700 font-bold focus:outline-none focus:text-neutral-300" href="/register">Register</a>
+          </div>
+      </div>
+      <!-- End Collapse -->
+  </nav>
+  
+  
+    <main id="content" class="w-100 mx-1 p-6">
+  
+      <div class="mt-5">
+        <!-- Form -->
+        <form>
+          <div class="grid grid-cols-6 gap-y-4">
+            <div class="col-span-3 p-6">
+              <!-- Form Group -->
+              <div>
+  
+                <div class="text-left mt-28">
+                  <h1 class="block text-5xl font-bold text-gray-800 dark:text-white mb-4">Sistem Informasi</h1>
+                  <h1 class="block text-5xl font-bold text-gray-800 dark:text-white mb-4">Layanan Berhenti Studi</h1>
+                  <h1 class="block text-5xl font-bold text-gray-800 dark:text-white mb-4">Sementara (BSS)</h1>
+                  <h1 class="block text-2xl italic text-gray-800 dark:text-white mb-2">Sistem ini diperuntukan untuk mahasiswa Universitas Andalas yang</h1>
+                  <h1 class="block text-2xl italic text-gray-800 dark:text-white">mengalami kendala dalam studi dan ingin mengajukan Berhenti Studi Sementara (BSS) dengan layanan yang lebih efisien.</h1>
+                </div>
+                
+              </div>
+            </div>
+            <div class="col-span-3">
+              <img src="/img/unand.jpg" alt="">
+            </div>
+          </div>
+        
+        <div class="col-span-6">
+          <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+            <!-- Title -->
+            <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+              <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Bagaimana Alur Pendaftaran BSS?</h2>
+            </div>
+            <!-- End Title -->
+          
+            
+            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:items-center">
+              <!-- Card 1 -->
+              <div class="flex flex-col justify-between border border-gray-200 text-center rounded-xl p-8 dark:border-neutral-800 h-full">
+                <span class="font-bold text-2xl text-gray-800 dark:text-neutral-200">Masuk / Login Akun Mahasiswa</span>
+                <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">Masuk ke sistem ini dengan email dan password yang sudah terdaftar.</p>
+              </div>
+            
+              <!-- Card 2 -->
+              <div class="flex flex-col justify-between border border-gray-200 text-center rounded-xl p-8 dark:border-neutral-800 h-full">
+                <span class="font-bold text-2xl text-gray-800 dark:text-neutral-200">Lakukan Pendaftaran</span>
+                <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">Klik tombol 'Pendaftaran Baru' yang tersedia di halaman ini.</p>
+              </div>
+            
+              <!-- Card 3 -->
+              <div class="flex flex-col justify-between border border-gray-200 text-center rounded-xl p-8 dark:border-neutral-800 h-full">
+                <span class="font-bold text-2xl text-gray-800 dark:text-neutral-200">Lengkapi Form</span>
+                <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">Isi semua form sesuai tempat yang sudah disediakan dengan data yang benar.</p>
+              </div>
+            
+              <!-- Card 4 -->
+              <div class="flex flex-col justify-between border border-gray-200 text-center rounded-xl p-8 dark:border-neutral-800 h-full">
+                <span class="font-bold text-2xl text-gray-800 dark:text-neutral-200">Upload Berkas Pendukung</span>
+                <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">Tambahkan berkas pendukung yang diperlukan, lebih lengkapnya silahkan cek di layanan BSS-Panduan Pendaftaran.</p>
+              </div>
+            
+              <!-- Card 5 -->
+              <div class="flex flex-col justify-between border border-gray-200 text-center rounded-xl p-8 dark:border-neutral-800 h-full">
+                <span class="font-bold text-2xl text-gray-800 dark:text-neutral-200">Kirim Pengajuan Pendaftaran</span>
+                <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">Kirim Pengajuan Pendaftaran agar nantinya bisa dicek dan ditanggapi oleh pihak Universitas Andalas.</p>
+              </div>
+            
+              <!-- Card 6 -->
+              <div class="flex flex-col justify-between border border-gray-200 text-center rounded-xl p-8 dark:border-neutral-800 h-full">
+                <span class="font-bold text-2xl text-gray-800 dark:text-neutral-200">Tunggu Konfirmasi</span>
+                <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">Jika Pengajuan Pendaftaran sudah dicek dan ditanggapi, pemberitahuan akan dikirimkan melalui akun BSS yang digunakan.</p>
+              </div>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="./js/script.js"></script>
+  </body>
+</html>
