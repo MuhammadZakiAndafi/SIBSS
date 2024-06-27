@@ -2,6 +2,10 @@ const bcrypt = require('bcryptjs');
 const db = require('../models');
 const { Op } = require('sequelize'); 
 
+exports.showDashboard = (req, res) => {
+  res.render('user/dashboard', { title: 'Dashboard' });
+};
+
 exports.ubahPassword = async (req, res) => {
   const userId = req.session.user.id; 
   const userRole = req.session.user.role; 

@@ -5,11 +5,6 @@ const path = require('path');
 const Swal = require('sweetalert2');
 const { Op } = require('sequelize'); 
 
-
-
-
-
-
 exports.showRegisBss = async (req, res) => {
   try {
     const user = await db.User.findOne({ where: { id: req.session.user.id } });

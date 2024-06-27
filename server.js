@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('auth/login');
+  res.render('user/dashboard');
 });
 
 // routes
@@ -43,6 +43,7 @@ app.use('/', userRoutes);
 app.use('/', pengajuanRoutes);
 app.use('/', approvalRoutes);
 app.use('/', skRoutes);
+
 
 sequelize.sync({ force: false })  // Set to true if you want to drop and recreate tables
   .then(() => {
