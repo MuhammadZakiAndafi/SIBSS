@@ -59,6 +59,9 @@
                   <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
                 </li> 
                 <li class="mb-4">
+                  <a href="/pengajuanterkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+                </li> 
+                <li class="mb-4">
                   <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
                 </li> 
                 <li class="mb-4">
@@ -215,7 +218,7 @@
                     </button>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                            <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                         </li>
                         <li>
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
@@ -263,20 +266,48 @@
                 </tr>
               </thead>
               <tbody>
-                <% 
-                  var no = 1
-                   pengajuans.forEach(pengajuan => { %>
+                <% if (pengajuans && pengajuans.length > 0) { %>
+                  <% pengajuans.forEach((pengajuan, index) => { %>
+                    <tr>
+                      <td class="border px-4 py-2"><%= index + 1 %></td>
+                      <td class="border px-4 py-2"><%= pengajuan.createdAt %></td>
+                      <td class="border px-4 py-2"><%= pengajuan.nama_lengkap %></td>
+                      <td class="border px-4 py-2"><%= pengajuan.nim %></td>
+                      <td class="border px-4 py-2">
+                        <% if (pengajuan.Approvals && pengajuan.Approvals.length > 0) { %>
+                          <% const kaprodiApproval = pengajuan.Approvals.find(approval => approval.statusApprovalKaprodi !== null); %>
+                          <% const wadekApproval = pengajuan.Approvals.find(approval => approval.statusApprovalWadek !== null); %>
+                          <% if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === true && wadekApproval && wadekApproval.statusApprovalWadek === true) { %>
+                            <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Verifikasi</span>
+                          <% } else if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === true) { %>
+                            <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui Kaprodi</span>
+                          <% } else if (kaprodiApproval && kaprodiApproval.statusApprovalKaprodi === false) { %>
+                            <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Ditolak Kaprodi</span>
+                          <% } else { %>
+                            <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">Proses</span>
+                          <% } %>
+                        <% } else { %>
+                          <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">Proses</span>
+                        <% } %>
+                      </td>
+                      <td class="border px-4 py-2">
+                        <% if (pengajuan.dokumen_pendukung) { %>
+                          <a href="/uploads/<%= pengajuan.dokumen_pendukung %>" download class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Unduh</a>
+                        <% } else { %>
+                          <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20">Tidak ada berkas</span>
+                        <% } %>
+                      </td>
+                    </tr>
+                  <% }) %>
+                <% } else { %>
                   <tr>
-                    <td class="border px-4 py-2"><%= no++ %></td>
-                    <td class="border px-4 py-2"><%= pengajuan.createdAt %></td>
-                    <td class="border px-4 py-2"><%= pengajuan.nama_lengkap %></td>
-                    <td class="border px-4 py-2"><%= pengajuan.nim %></td>
-                    <td class="border px-4 py-2"></td>
-                    <td class="border px-4 py-2"><a href="/detail/<%= pengajuan.id %>" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Detail</a></td>
+                    <td colspan="6" class="border px-4 py-2 text-center">Belum ada data pengajuan</td>
                   </tr>
-                <%})%>
+                <% } %>
               </tbody>
             </table>
+            
+            
           </div>
         </div>
     <!-- end content -->

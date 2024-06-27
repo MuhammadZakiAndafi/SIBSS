@@ -3,6 +3,11 @@ const db = require('../models');
 const moment = require('moment');
 const path = require('path');
 const Swal = require('sweetalert2');
+const { Op } = require('sequelize'); 
+
+
+
+
 
 
 exports.showRegisBss = async (req, res) => {
@@ -93,7 +98,7 @@ exports.updatePengajuan = async (req, res) => {
           return res.status(404).send('Pengajuan not found or you are not authorized to update it');
       }
 
-      res.redirect('/riwayatPengajuan'); // Redirect setelah berhasil update
+      res.redirect('/pengajuanTerkirim'); // Redirect setelah berhasil update
 
   } catch (error) {
       console.error('Error updating pengajuan:', error);
@@ -137,30 +142,25 @@ exports.showPanduan = async (req, res) => {
 
 exports.showStatus = async (req, res) => {
   try {
-    // Ambil data pengguna yang sedang login
     const userId = req.session.user.id;
     const userlogin = req.session.user;
-    const userRole = userlogin.role; // Mendapatkan role user
+    const userRole = userlogin.role;
 
-    // Ambil pengajuanId dari model Pengajuan berdasarkan userId
     const pengajuan = await db.Pengajuan.findOne({
       where: { userId: userId }
-    }); 
-
-    if (!pengajuan) {
-      throw new Error('Pengajuan not found');
-    }
-
-    // Ambil data Approval berdasarkan pengajuanId
-    const approvals = await db.Approval.findAll({
-      where: { pengajuanId: pengajuan.id },
-      include: [{ model: db.Pengajuan }]
     });
 
-    // Render halaman status dengan data approvals dan pengguna yang sedang login
+    let approvals = [];
+    if (pengajuan) {
+      approvals = await db.Approval.findAll({
+        where: { pengajuanId: pengajuan.id },
+        include: [{ model: db.Pengajuan }]
+      });
+    }
+
     res.render('user/status', {
       title: 'Status Pengajuan',
-      user: req.session.user, // Data pengguna yang sedang login
+      user: userlogin,
       approvals: approvals,
       userRole
     });
@@ -169,6 +169,7 @@ exports.showStatus = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
 
 exports.showRiwayat = async (req, res) => {
   const userlogin = req.session.user;
@@ -235,69 +236,79 @@ exports.showRiwayat = async (req, res) => {
 };
 
 
+
+
+
 exports.showRiwayatMahasiswa = async (req, res) => {
-  const userlogin = req.session.user;
-  const userRole = userlogin.role; // Mendapatkan role user
+  try {
+    const userlogin = req.session.user;
+    const userRole = userlogin.role;
 
-  const pengajuans = await db.Pengajuan.findAll({
-    where: { userId: userlogin.id }
-  });
+    const pengajuans = await db.Pengajuan.findAll({
+      where: { userId: userlogin.id },
+      include: [
+        {
+          model: db.Approval,
+          as: 'approvals', // Ensure this matches your model association
+        },
+      ],
+    });
 
-  if (!pengajuans) {
-    throw new Error('Pengajuan not found');
-  } else {
-    var pengajuanss = new Array();
-    pengajuans.forEach(pengajuan => {
-      var d = new Date();
+    if (!pengajuans) {
+      throw new Error('Pengajuan not found');
+    }
+
+    const pengajuanss = pengajuans.map(pengajuan => {
+      const d = new Date();
       const year = d.getFullYear();
-      const month = d.getMonth();
-      // var lastDay = new Date(year, month + 1, 0).getDate();
-      var status = "";
-      var periodesemester = "";
-      var tglberenti = "";
-      var batasperiode = "";
+      const monthcreated = pengajuan.createdAt.getMonth() + 1;
+      let periodesemester, tglberenti, status;
 
-      const monthcreated = pengajuan.createdAt.toJSON().substring(5, 7);
-      if (parseInt(monthcreated) <= 6) {
-        periodesemester = year + "-" + "Ganjil";
-        var lastDay = new Date(year, 6, 0).getDate();
-        tglberenti = year + "-" + "06-" + lastDay;
-        batasperiode = tglberenti;
-
-        var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
-        var tanggal2 = new moment(tglberenti);
-        var selisih = tanggal2.diff(tanggal1, 'days');
-        if (selisih < 0) {
-          status = "BSS Berakhir";
-        } else {
-          status = "On Progress";
-        }
+      if (monthcreated <= 6) {
+        periodesemester = `${year}-Ganjil`;
+        tglberenti = `${year}-06-${new Date(year, 6, 0).getDate()}`;
       } else {
-        periodesemester = year + "-" + "Genap";
-        var lastDay = new Date(year, 12, 0).getDate();
-        tglberenti = year + "-" + "12-" + lastDay;
-        batasperiode = tglberenti;
-        var tanggal1 = new moment(pengajuan.createdAt.toJSON().substring(0, 10));
-        var tanggal2 = new moment(tglberenti);
-        var selisih = tanggal2.diff(tanggal1, 'days');
-        if (selisih < 0) {
-          status = "BSS Berakhir";
+        periodesemester = `${year}-Genap`;
+        tglberenti = `${year}-12-${new Date(year, 12, 0).getDate()}`;
+      }
+
+      const selisih = moment(tglberenti).diff(moment(pengajuan.createdAt), 'days');
+      status = selisih < 0 ? 'BSS Berakhir' : 'On Progress';
+
+      const approval = pengajuan.approvals[0]; // Assuming one-to-one relationship for simplicity
+      let approvalStatus = '';
+      if (approval) {
+        if (approval.statusApprovalKaprodi) {
+          approvalStatus = 'Diterima Kaprodi';
+        } else if (approval.statusApprovalWadek) {
+          approvalStatus = 'Diterima Wakil Dekan 1';
         } else {
-          status = "On Progress";
+          approvalStatus = 'Verifikasi';
         }
       }
 
-      var obj = { id: pengajuan.id, createdAt: pengajuan.createdAt, kendala_bss: pengajuan.kendala_bss, status: status, tglberenti: tglberenti, periodesemester: periodesemester, batasperiode: batasperiode, statuspemulihan: "-" };
-      pengajuanss.push(obj);
+      return {
+        id: pengajuan.id,
+        createdAt: pengajuan.createdAt,
+        kendala_bss: pengajuan.kendala_bss,
+        status,
+        tglberenti,
+        periodesemester,
+        batasperiode: tglberenti,
+        statuspemulihan: '-',
+        approvalStatus,
+      };
     });
 
+    res.render('user/riwayatpengajuanmahasiswa', {
+      title: 'Riwayat Pengajuan',
+      pengajuans: pengajuanss,
+      userRole,
+    });
+  } catch (error) {
+    console.error('Error fetching pengajuan data:', error);
+    res.status(500).send('Internal Server Error');
   }
-
-  res.render('user/riwayatpengajuan', {
-    title: 'riwayatpengajuan',
-    pengajuans: pengajuanss,
-    userRole
-  });
 };
 
 exports.createPermohonanBss = async (req, res) => {
@@ -330,6 +341,27 @@ exports.createPermohonanBss = async (req, res) => {
   }
 };
 
+exports.hapusPengajuan = async (req, res) => {
+  try {
+      const pengajuanId = req.params.id; // Ambil ID pengajuan dari parameter URL
+
+      // Lakukan proses penghapusan berdasarkan ID
+      const deletedRows = await db.Pengajuan.destroy({
+          where: {
+              id: pengajuanId
+          }
+      });
+
+      if (deletedRows === 0) {
+          return res.status(404).send('Pengajuan not found or you are not authorized to delete it');
+      }
+
+      res.status(200).send('Pengajuan berhasil dihapus');
+  } catch (error) {
+      console.error('Error deleting pengajuan:', error);
+      res.status(500).send('Internal Server Error');
+  }
+}
 exports.showpPeriodeBSS = async (req, res) => {
   try {
     const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
@@ -404,31 +436,31 @@ exports.showpPeriodeBSS = async (req, res) => {
 exports.showpStatusDaftarMahasiswa = async (req, res) => {
   try {
     const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
+    const user = req.session.user; // Asumsikan req.session.user menyimpan informasi user yang sedang login
     const userRole = user.role; // Mendapatkan role user
 
-    // Ambil pengajuan yang terhubung
-    const pengajuans = await db.Pengajuan.findAll();
+    // Ambil pengajuan yang terhubung dengan userId dari model Pengajuan
+    const pengajuans = await db.Pengajuan.findAll({
+      where: { userId: userId },
+      include: [
+        {
+          model: db.Approval,
+          required: false // Gunakan required: false agar data Pengajuan tetap terambil meskipun tidak ada Approval
+        }
+      ]
+    });
 
-    if (!pengajuans) {
-      return res.status(404).send('Data pengajuan tidak ditemukan');
-    }
 
-    // // Ambil dokumen_pendukung dari pengajuan
-    // const dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : [];
-
-    // Render halaman panduan dengan data dokumenPendukung
+    // Render halaman statusdaftarmahasiswa dengan data pengajuans
     res.render('user/statusdaftarmahasiswa', {
       title: 'Status Periode Mahasiswa',
       pengajuans: pengajuans,
-      userRole
+      userRole: userRole
     });
   } catch (error) {
-    console.error('Error fetching supporting documents:', error);
+    console.error('Error fetching pengajuans:', error);
     res.status(500).send('Internal Server Error');
   }
-
-
 };
 
 
@@ -461,24 +493,36 @@ exports.detailPengajuan = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-exports.hapusPengajuan = async (req, res) => {
+
+
+exports.pengajuanTerkirim = async (req, res) => {
   try {
-      const pengajuanId = req.params.id; // Ambil ID pengajuan dari parameter URL
+    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
+    const userRole = user.role; // Mendapatkan role user
 
-      // Lakukan proses penghapusan berdasarkan ID
-      const deletedRows = await db.Pengajuan.destroy({
-          where: {
-              id: pengajuanId
-          }
-      });
+    // Ambil semua pengajuan yang terhubung dengan userId
+    const pengajuanList = await db.Pengajuan.findAll({
+      where: { userId: userId }
+    });
 
-      if (deletedRows === 0) {
-          return res.status(404).send('Pengajuan not found or you are not authorized to delete it');
-      }
 
-      res.status(200).send('Pengajuan berhasil dihapus');
+    // Process dokumen_pendukung for each pengajuan
+    const riwayatPengajuan = pengajuanList.map(pengajuan => {
+      return {
+        ...pengajuan.dataValues,
+        dokumenPendukung: pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : []
+      };
+    });
+
+    // Render halaman riwayat pengajuan dengan data pengajuan dan dokumenPendukung
+    res.render('user/pengajuanTerkirim', {
+      title: 'Pengajuan Terkirim',
+      userRole,
+      riwayatPengajuan // pass the fetched data to the view
+    });
   } catch (error) {
-      console.error('Error deleting pengajuan:', error);
-      res.status(500).send('Internal Server Error');
+    console.error('Error fetching pengajuan data:', error);
+    res.status(500).send('Internal Server Error');
   }
 };

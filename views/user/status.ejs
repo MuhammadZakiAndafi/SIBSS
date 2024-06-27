@@ -45,16 +45,22 @@
           </a>
           <ul class="pl-7 mt-2 hidden group-[.selected]:block">
             <li class="mb-4">
-              <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
+              <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" >Pendaftaran BSS</a>
             </li> 
             <li class="mb-4">
-              <a href="/statusdaftarmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
+              <a href="/statusdaftarmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Status Mahasiswa</a>
             </li> 
             <li class="mb-4">
               <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
             </li> 
             <li class="mb-4">
               <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+            </li> 
+            <li class="mb-4">
+              <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Notifikasi</a>
+            </li> 
+            <li class="mb-4">
+              <a href="/pengajuanterkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
             </li> 
             <li class="mb-4">
               <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
@@ -213,7 +219,7 @@
                     </button>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                            <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                         </li>
                         <li>
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
@@ -234,7 +240,7 @@
             </div>
             <div class="nim">
               <span>NIM</span>
-              <span>: <%= user.nim %></span> <!-- Anda perlu menyesuaikan dengan properti yang sesuai dari objek user -->
+              <span>: <%= user.nim %></span>
             </div>
           </div>
           <table class="styled-table">
@@ -246,26 +252,36 @@
               </tr>
             </thead>
             <tbody>
-              <% approvals.forEach(approval => { %>
+              <% if (approvals.length === 0) { %>
                 <tr>
-                  <td><%= approval.pengajuanId %></td>
-                  <td>
-                    <% if (approval.statusApprovalKaprodi) { %>
-                      <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui</span>
-                    <% } else { %>
-                      <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Belum Disetujui</span>
-                    <% } %>
-                  </td>
-                  <td>
-                    <% if (approval.statusApprovalWadek) { %>
-                      <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui</span>
-                    <% } else { %>
-                      <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Belum Disetujui</span>
-                    <% } %>
-                  </td>
+                  <td colspan="3" class="border px-4 py-2 text-center">Belum ada status</td>
                 </tr>
-              <% }) %>
-            </tbody>            
+              <% } else { %>
+                <% approvals.forEach(approval => { %>
+                  <tr>
+                    <td class="border px-4 py-2"><%= approval.pengajuanId %></td>
+                    <td class="border px-4 py-2">
+                      <% if (approval.statusApprovalKaprodi === 'Disetujui') { %>
+                        <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui</span>
+                      <% } else if (approval.statusApprovalKaprodi === 'Ditolak') { %>
+                        <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Ditolak</span>
+                      <% } else { %>
+                        <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">Diproses</span>
+                      <% } %>
+                    </td>
+                    <td class="border px-4 py-2">
+                      <% if (approval.statusApprovalWadek === 'Disetujui') { %>
+                        <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Disetujui</span>
+                      <% } else if (approval.statusApprovalWadek === 'Ditolak') { %>
+                        <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Ditolak</span>
+                      <% } else { %>
+                        <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">Diproses</span>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% }) %>
+              <% } %>
+            </tbody>
           </table>
         </div>
         

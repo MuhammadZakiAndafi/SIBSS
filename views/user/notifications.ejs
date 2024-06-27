@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./css/template.css">
-    <title><%= title %></title>
+    <link rel="stylesheet" href="./css/status.css">
+    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 </head>
 <body class="text-gray-800 font-inter">
+    
     <!-- start: Sidebar -->
     <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
         <a href="#" class="flex items-center pb-4 border-b border-b-gray-200">
@@ -24,10 +28,13 @@
               </a>
               <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                 <li class="mb-4">
-                  <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Daftar Pengajuan</a>
+                  <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" >Daftar Pengajuan</a>
                 </li> 
                 <li class="mb-4">
                     <a href="/statusdaftarmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
+                  </li> 
+                <li class="mb-4">
+                    <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3"style="color:white;">Notifikasi</a>
                   </li> 
                 <li class="mb-4">
                   <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat Mahasiswa</a>
@@ -56,10 +63,10 @@
                   <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
                 </li> 
                 <li class="mb-4">
-                  <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Notifikasi</a>
+                  <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3"style="color:white;">Notifikasi</a>
                 </li> 
                 <li class="mb-4">
-                  <a href="/pengajuanTerkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Pengajuan Terkirim</a>
+                  <a href="/pengajuanterkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Pengajuan Terkirim</a>
                 </li> 
                 <li class="mb-4">
                   <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
@@ -79,8 +86,8 @@
     </div>
     <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
     <!-- end: Sidebar -->
-    
-    <!-- start: Main -->
+
+    start: Main
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
         <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
             <button type="button" class="text-lg text-gray-600 sidebar-toggle">
@@ -230,130 +237,56 @@
                 </li>
             </ul>
         </div>
+
         <!-- content -->
-        <div class="container mx-auto p-6 con-pendaftaranbss">
-          <form class="space-y-6" action="/pendaftaranBss" method="post" enctype="multipart/form-data">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input1" class="block text-sm font-medium text-gray-700">Nama lengkap</label>
-                      <input type="text" id="input1" name="nama_lengkap" value="<%= user.name %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                      <label for="input2" class="block text-sm font-medium text-gray-700">NIM</label>
-                      <input value="<%= user.nim %>" type="text" id="input2" name="nim" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-              </div>
-              <!-- Baris kedua -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input3" class="block text-sm font-medium text-gray-700">Tanggal lahir</label>
-                      <input type="date" id="input3" name="tanggal_lahir" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                    <label for="jeniskelamin" class="block text-sm font-medium text-gray-700">Jenis kelamin</label>
-                    <select id="jeniskelamin" name="jenis_kelamin" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                        <option value="Pria">Pria</option>
-                        <option value="Wanita">Wanita</option>
-                    </select>
-                  </div>
-              </div>
-              <!-- Baris ketiga -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input5" class="block text-sm font-medium text-gray-700">Alamat</label>
-                      <input type="text" id="input5" name="alamat" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                      <label for="input6" class="block text-sm font-medium text-gray-700">No HP</label>
-                      <input type="text" id="input6" name="no_hp" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-              </div>
-              <!-- Baris keempat -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                      <label for="input7" class="block text-sm font-medium text-gray-700">Departement</label>
-                      <input type="text" id="input7" name="departement" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-                  <div>
-                      <label for="input8" class="block text-sm font-medium text-gray-700">Fakultas</label>
-                      <input type="text" id="input8" name="fakultas" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                  </div>
-              </div>
-              <!-- Baris kelima -->
-              <div style="margin-bottom:30px;">
-                  <label for="input9" class="block text-sm font-medium text-gray-700">Kendala BSS</label>
-                  <input type="text" id="input9" name="kendala_bss" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-              </div>
-              <!-- Baris keenam -->
-              <div style="margin-bottom:30px;">
-                <label for="input10" class="block text-sm font-medium text-gray-700">Alasan berhenti studi sementara</label>
-                <textarea id="input10" name="alasan_berhenti" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-              </div>
-              
-              <!-- Baris ketujuh -->
-              <div>
-                  <label for="file" class="block text-sm font-medium text-gray-700">Upload dokumen pendukung</label>
-                  <input type="file" id="file" name="dokumen_pendukung" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none sm:text-sm">
-              </div>
-              <!-- Button submit -->
-              <div>
-                  <button type="submit" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: rgb(37 99 235);">
-                      Submit
-                  </button>
-              </div>
-          </form>
-      </div>
-      
-        <!-- end content -->
+        <div class="container m-5 mt-10">
+          <h1 class="text-3xl font-bold mb-8"><%= title %></h1>
+          <div class="bg-white shadow-md rounded-lg">
+            <% if (pengajuanList.length === 0) { %>
+              <p class="text-gray-500 p-4">Belum ada notifikasi.</p>
+            <% } else { %>
+              <ul class="divide-y divide-gray-200">
+                <% pengajuanList.forEach(pengajuan => { %>
+                  <li class="p-4">
+                    <div class="flex items-center justify-between">
+                      <div class="w-full">
+                        <p class="text-lg font-semibold"><%= pengajuan.nama_lengkap %> (<%= pengajuan.nim %>)</p>
+                        <p class="text-gray-600 mb-2"><%= pengajuan.dataPengajuan %></p>
+                        <% if (pengajuan.Approvals && pengajuan.Approvals.length > 0) { %>
+                          <div class="flex justify-between items-center bg-gray-100 rounded-lg p-3">
+                            <div>
+                              <p class="text-sm text-gray-600">Status Kaprodi: <span class="font-semibold <%= pengajuan.Approvals[0].statusApprovalKaprodi === 'Disetujui' ? 'text-green-600' : (pengajuan.Approvals[0].statusApprovalKaprodi === 'Ditolak' ? 'text-red-600' : 'text-yellow-600') %>"><%= pengajuan.Approvals[0].statusApprovalKaprodi %></span></p>
+                              <p class="text-sm text-gray-600">Status Wadek: <span class="font-semibold <%= pengajuan.Approvals[0].statusApprovalWadek === 'Disetujui' ? 'text-green-600' : (pengajuan.Approvals[0].statusApprovalWadek === 'Ditolak' ? 'text-red-600' : 'text-yellow-600') %>"><%= pengajuan.Approvals[0].statusApprovalWadek %></span></p>
+                            </div>
+                            <div class="ml-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 cursor-pointer hover:text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 6a1 1 0 012 0v5a1 1 0 11-2 0V6zm1 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                              </svg>
+                            </div>
+                          </div>
+                        <% } else { %>
+                          <p class="text-sm text-gray-600 mt-2">Belum ada status approval.</p>
+                        <% } %>
+                      </div>
+                    </div>
+                  </li>
+                <% }) %>
+              </ul>
+            <% } %>
+          </div>
+        </div>
         
+        
+        
+    <!-- end content -->
     </main>
     <!-- end: Main -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        $(document).ready(function() {
-            $('form').submit(function(e) {
-                e.preventDefault(); // Mencegah form untuk melakukan submit default
-    
-                var form = this;
-                var formData = new FormData(form);
-    
-                $.ajax({
-                    type: $(form).attr('method'),
-                    url: $(form).attr('action'),
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        // Menampilkan SweetAlert jika sukses
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Sukses!',
-                            text: 'Permohonan berhasil dibuat',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then(function() {
-                            window.location.href = '/pendaftaranBss'; // Redirect setelah SweetAlert ditutup
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        // Menampilkan SweetAlert jika gagal
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Gagal membuat permohonan',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-    
+   
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>
+
+
+

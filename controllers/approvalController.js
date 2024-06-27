@@ -39,50 +39,49 @@ exports.showDetail = async (req, res) => {
   }
 };
 
+// Controller
 exports.updateApprovalStatus = async (req, res) => {
-  const { approvalType, action, pengajuanId } = req.body;
+  const { approvalType, action, pengajuanId, alasanReject } = req.body;
 
   try {
-    let updateData = {};
-    let currentDate = new Date();
+      let updateData = {};
+      let currentDate = new Date();
 
-    if (approvalType === 'kaprodi') {
-      updateData = {
-        statusApprovalKaprodi: action === 'approve' ? '1' : '0',
-        tanggalApprovalKaprodi: currentDate,
-      };
-    } else if (approvalType === 'wadek') {
-      updateData = {
-        statusApprovalWadek: action === 'approve' ? '1' : '0',
-        tanggalApprovalWadek: currentDate,
-      };
-    }
-
-    // Gunakan findOrCreate untuk mencari atau membuat record baru
-    const [approval, created] = await db.Approval.findOrCreate({
-      where: { pengajuanId },
-      defaults: {
-        pengajuanId,
-        ...updateData
+      if (approvalType === 'kaprodi') {
+          updateData = {
+              statusApprovalKaprodi: action === 'approve' ? 'Disetujui' : 'Ditolak',
+              tanggalApprovalKaprodi: currentDate,
+              alasanRejectKaprodi: action === 'reject' ? alasanReject : null,
+          };
+      } else if (approvalType === 'wadek') {
+          updateData = {
+              statusApprovalWadek: action === 'approve' ? 'Disetujui' : 'Ditolak',
+              tanggalApprovalWadek: currentDate,
+              alasanRejectWadek: action === 'reject' ? alasanReject : null,
+          };
       }
-    });
 
-    // Jika record ditemukan, lakukan update
-    if (!created) {
-      await approval.update(updateData);
-    }
+      const [approval, created] = await db.Approval.findOrCreate({
+          where: { pengajuanId },
+          defaults: {
+              pengajuanId,
+              ...updateData
+          }
+      });
 
-    req.flash('success', 'Approval status updated successfully');
-    res.redirect('/daftarPengajuan');
+      if (!created) {
+          await approval.update(updateData);
+      }
+
+      req.flash('success', 'Approval status updated successfully');
+      res.redirect('/daftarPengajuan');
   } catch (error) {
-    console.error(error);
-    req.flash('error', 'Failed to update approval status');
-    res.redirect('/daftarPengajuan');
+      console.error(error);
+      req.flash('error', 'Failed to update approval status');
+      res.redirect('/daftarPengajuan');
   }
 };
 
-
-const db = require('../models');
 
 exports.daftarPengajuan = async (req, res) => {
   const userlogin = req.session.user;
@@ -95,7 +94,7 @@ exports.daftarPengajuan = async (req, res) => {
 };
 
 exports.showDetail = async (req, res) => {
-  try {
+  try { 
     const pengajuanId = req.params.id;
     const userlogin = req.session.user;
     const userRole = userlogin.role; // Mendapatkan role user
@@ -123,46 +122,6 @@ exports.showDetail = async (req, res) => {
   }
 };
 
-exports.updateApprovalStatus = async (req, res) => {
-  const { approvalType, action, pengajuanId } = req.body;
 
-  try {
-    let updateData = {};
-    let currentDate = new Date();
-
-    if (approvalType === 'kaprodi') {
-      updateData = {
-        statusApprovalKaprodi: action === 'approve' ? '1' : '0',
-        tanggalApprovalKaprodi: currentDate,
-      };
-    } else if (approvalType === 'wadek') {
-      updateData = {
-        statusApprovalWadek: action === 'approve' ? '1' : '0',
-        tanggalApprovalWadek: currentDate,
-      };
-    }
-
-    // Gunakan findOrCreate untuk mencari atau membuat record baru
-    const [approval, created] = await db.Approval.findOrCreate({
-      where: { pengajuanId },
-      defaults: {
-        pengajuanId,
-        ...updateData
-      }
-    });
-
-    // Jika record ditemukan, lakukan update
-    if (!created) {
-      await approval.update(updateData);
-    }
-
-    req.flash('success', 'Approval status updated successfully');
-    res.redirect('/daftarPengajuan');
-  } catch (error) {
-    console.error(error);
-    req.flash('error', 'Failed to update approval status');
-    res.redirect('/daftarPengajuan');
-  }
-};
 
 

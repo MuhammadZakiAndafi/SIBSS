@@ -1,25 +1,33 @@
+// Model (Sequelize)
 module.exports = (sequelize, DataTypes) => {
-    const Approval = sequelize.define('Approval', {
+  const Approval = sequelize.define('Approval', {
       statusApprovalKaprodi: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+          type: DataTypes.ENUM,
+          values: ['Diproses', 'Disetujui', 'Ditolak'],
+          defaultValue: 'Diproses'
       },
       tanggalApprovalKaprodi: {
-        type: DataTypes.DATE
+          type: DataTypes.DATE
+      },
+      alasanRejectKaprodi: {
+          type: DataTypes.TEXT
       },
       statusApprovalWadek: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+          type: DataTypes.ENUM,
+          values: ['Diproses', 'Disetujui', 'Ditolak'],
+          defaultValue: 'Diproses'
       },
       tanggalApprovalWadek: {
-        type: DataTypes.DATE
+          type: DataTypes.DATE
+      },
+      alasanRejectWadek: {
+          type: DataTypes.TEXT
       }
-    });
-  
-    Approval.associate = models => {
+  });
+
+  Approval.associate = models => {
       Approval.belongsTo(models.Pengajuan, { foreignKey: 'pengajuanId' });
-    };
-  
-    return Approval;
   };
-  
+
+  return Approval;
+};

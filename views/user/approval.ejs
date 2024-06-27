@@ -13,18 +13,6 @@
     <!-- start: Sidebar -->
     <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
       <a href="#" class="flex items-center pb-4 border-b border-b-gray-200">
-<<<<<<< HEAD
-        <img src="/img/logounand.png" alt="SIBSS Logo" class="h-8 w-9 mr-3" style="padding-left: 10px;" > <!-- Adjust the path, alt text, and size as needed -->
-        <span class="text-2xl font-bold text-white" style="color: #0CBE5A; padding-left: 10px;">SIBSS</span>
-    </a>
-      <ul class="mt-4">
-        <% if (userRole !== 'mahasiswa') { %>
-          <a href="/daftarPengajuan" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
-            <i class="ri-graduation-cap-line mr-3 text-lg"></i>
-            <span class="text-sm">Daftar Pengajuan</span>
-          </a>
-        
-=======
           <span class="text-2xl font-bold text-white ml-3">SIBSS</span>
       </a>
       <ul class="mt-4">
@@ -47,7 +35,6 @@
               </li> 
             </ul>
           </li>
->>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
         <% } %>
         <% if (userRole === 'mahasiswa') { %>
           <li class="mb-1 group">
@@ -63,18 +50,15 @@
               <li class="mb-4">
                 <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
               </li> 
-<<<<<<< HEAD
-              <!-- <li class="mb-4">
-                <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
-              </li>  -->
-=======
               <li class="mb-4">
                 <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
               </li> 
               <li class="mb-4">
                 <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
               </li> 
->>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
+              <li class="mb-4">
+                <a href="/pengajuanterkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+              </li> 
               <li class="mb-4">
                 <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
               </li> 
@@ -232,7 +216,7 @@
                     </button>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                            <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                         </li>
                         <li>
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
@@ -253,22 +237,22 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
         <label for="input1" class="block text-sm font-medium text-gray-700">Nama lengkap</label>
-        <input type="text" id="input1" value="<%= pengajuan.nama_lengkap %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"readonly disabled>
+        <input type="text" id="input1" value="<%= pengajuan.nama_lengkap %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
       </div>
       <div>
         <label for="input2" class="block text-sm font-medium text-gray-700">NIM</label>
-        <input value="<%= pengajuan.nim %>" type="text" id="input2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        <input value="<%= pengajuan.nim %>" type="text" id="input2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
       </div>
     </div>
     <!-- Baris kedua -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
         <label for="input3" class="block text-sm font-medium text-gray-700">Tanggal lahir</label>
-        <input type="date" id="input3"  value="<%= pengajuan.tanggal_lahir%>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"readonly disabled>
+        <input type="date" id="input3" value="<%= pengajuan.tanggal_lahir %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
       </div>
       <div>
         <label for="jeniskelamin" class="block text-sm font-medium text-gray-700">Jenis kelamin</label>
-        <select id="jeniskelamin"  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required readonly disabled>
+        <select id="jeniskelamin" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required readonly disabled>
           <option value="Pria" <%= pengajuan.jenis_kelamin === 'Pria' ? 'selected' : '' %>>Pria</option>
           <option value="Wanita" <%= pengajuan.jenis_kelamin === 'Wanita' ? 'selected' : '' %>>Wanita</option>
         </select>
@@ -278,28 +262,28 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
         <label for="input5" class="block text-sm font-medium text-gray-700">Alamat</label>
-        <input type="text" id="input5" value="<%= pengajuan.alamat %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"readonly disabled>
+        <input type="text" id="input5" value="<%= pengajuan.alamat %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
       </div>
       <div>
         <label for="input6" class="block text-sm font-medium text-gray-700">No HP</label>
-        <input type="text" id="input6"  value="<%= pengajuan.no_hp %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"readonly disabled>
+        <input type="text" id="input6" value="<%= pengajuan.no_hp %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
       </div>
     </div>
     <!-- Baris keempat -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
         <label for="input7" class="block text-sm font-medium text-gray-700">Departement</label>
-        <input type="text" id="input7"  value="<%= pengajuan.departement %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"readonly disabled>
+        <input type="text" id="input7" value="<%= pengajuan.departement %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
       </div>
       <div>
         <label for="input8" class="block text-sm font-medium text-gray-700">Fakultas</label>
-        <input type="text" id="input8" value="<%= pengajuan.fakultas %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"readonly disabled>
+        <input type="text" id="input8" value="<%= pengajuan.fakultas %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
       </div>
     </div>
     <!-- Baris kelima -->
     <div style="margin-bottom:30px;">
       <label for="input9" class="block text-sm font-medium text-gray-700">Kendala BSS</label>
-      <input type="text" id="input9"  value="<%= pengajuan.kendala_bss %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"readonly disabled>
+      <input type="text" id="input9" value="<%= pengajuan.kendala_bss %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
     </div>
     <!-- Baris keenam -->
     <div style="margin-bottom:30px;">
@@ -315,11 +299,7 @@
         <button type="submit" name="action" value="approve" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: rgb(37 99 235);">
           Approve
         </button>
-<<<<<<< HEAD
-        <button type="submit" name="action" value="reject" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: rgb(37 99 235);">
-=======
         <button type="submit" name="action" value="reject" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: rgb(245, 21, 21);">
->>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
           Reject
         </button>
       </div>
@@ -329,7 +309,8 @@
         </a>
       </div>
     </div>
-  </form>
+</form>
+
 </div>
 
         <!-- end content -->

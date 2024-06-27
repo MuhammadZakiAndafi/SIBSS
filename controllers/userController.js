@@ -1,5 +1,46 @@
 const bcrypt = require('bcryptjs');
 const db = require('../models');
+const { Op } = require('sequelize'); 
+
+
+exports.showNotifications = async (req, res) => {
+  try {
+    const userRole = req.session.user.role;
+    if (!req.session.user || !req.session.user.id) {
+      return res.status(401).send('User not authenticated');
+    }
+
+    const userId = req.session.user.id;
+
+    const pengajuanList = await db.Pengajuan.findAll({
+      where: { userId: userId },
+      include: [{
+        model: db.Approval,
+        where: {
+          [Op.or]: [
+            { statusApprovalKaprodi: 'Disetujui' },
+            { statusApprovalWadek: 'Disetujui' },
+            { statusApprovalKaprodi: 'Ditolak' },
+            { statusApprovalWadek: 'Ditolak' },
+            { statusApprovalKaprodi: 'Diproses' },
+            { statusApprovalWadek: 'Diproses' }
+          ]
+        }
+      }]
+    });
+
+    res.render('user/notifications', {
+      title: 'Notifikasi Pengajuan',
+      user: req.session.user,
+      pengajuanList: pengajuanList,
+      userRole
+    });
+  } catch (error) {
+    console.error('Error fetching notifications:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 
 exports.showLoginForm = (req, res) => {
   res.render('auth/login', { title: 'Login' });
@@ -50,14 +91,13 @@ exports.logout = (req, res) => {
 };
 
 exports.showProfile = async (req, res) => {
-  const userRole = userlogin.role; // Mendapatkan role user
+  const userRole = req.session.user.role; // Mendapatkan role user
     // Render halaman status dengan data approvals dan pengguna yang sedang login
     res.render('user/profile', {
       title: 'Profile',
-      user: req.session.user, // Data pengguna yang sedang login
-      user: user,
+      user: req.session.user, 
       userRole
-    });
+    }); 
   };
   
 exports.profile = async (req, res) => {
@@ -67,7 +107,7 @@ exports.profile = async (req, res) => {
    // Ambil pengajuanId dari model Pengajuan berdasarkan userId
    try {
     const user = await db.User.findOne({
-      where: { userId: userId },
+      where: { id: userId },
       include: [{ model: db.User }]
     }); 
     req.session.user = user;
@@ -77,3 +117,50 @@ exports.profile = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const userId = req.session.user.id; // Ambil ID pengguna dari sesi
+    const { name, nim, email } = req.body; // Ambil data dari body request
+
+    // Pastikan pengguna ditemukan
+    const user = await db.User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Update profil berdasarkan ID pengguna
+    const [updatedRows] = await db.User.update({
+      name,
+      nim,
+      email
+    }, {
+      where: {
+        id: userId
+      }
+    });
+
+    if (updatedRows === 0) {
+      return res.status(404).send('User not found or not updated');
+    }
+
+    // Perbarui data pengguna dalam sesi setelah berhasil diupdate
+    req.session.user = await db.User.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    res.redirect('/profile'); // Redirect setelah berhasil update
+
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./css/template.css">
     <link rel="stylesheet" href="./css/status.css">
     <title><%= title %></title>
@@ -53,6 +54,12 @@
                 </li> 
                 <li class="mb-4">
                   <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Notifikasi</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/pengajuanterkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
                 </li> 
                 <li class="mb-4">
                   <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
@@ -211,7 +218,7 @@
                     </button>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                            <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                         </li>
                         <li>
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
@@ -229,34 +236,25 @@
           <div class="bg-white shadow-lg rounded-lg p-6">
             <div class="space-y-4">
               <% if (sks.length > 0) { %>
-                <% sks.forEach((sk) => { %>
                   <div class="bg-gray-100 p-4 rounded-md mb-2">
                     <div class="flex justify-between items-center">
                       <span>
                         <span class="font-bold">Nomor Surat :  </span>
-                        <span><%= sk.nomor %></span>
+                        <span><%= sks.nomor %></span>
                       </span>
-                      <span  class="font-bold"><%= sk.tanggal.toDateString() %></span>
+                      <span  class="font-bold"><%= sks.tanggal%></span>
                     </div>
-                    <% if (sk.keterangan) { %>
+                    <% if (sks.keterangan) { %>
                       <div class="mt-2">
                         <span  class="font-bold">Keterangan:</span>
-                        <span><%= sk.keterangan %></span>
+                        <span><%= sks.keterangan %></span>
                       </div>
                     <% } %>
-                    <% if (sk.lampiran) { %>
+                    <% if (sks.lampiran) { %>
                       <div class="mt-4">
-                        <a href="/uploads/<%= sk.lampiran %>" class="bg-blue-600 text-white rounded px-4 py-2" download>Unduh Lampiran</a>
+                        <a href="/uploads/<%= sks.lampiran %>" class="bg-blue-600 text-white rounded px-4 py-2" download>Unduh Lampiran</a>
                       </div>
                     <% } %>
-                    <!-- Add a button for generating PDF -->
-                    <div class="mt-4">
-                        <form action="/generate-pdf/<%= sk.id %>" method="GET">
-                        <button type="submit" class="bg-green-600 text-white rounded px-4 py-2">Download SK</button>
-                        </form>
-                    </div>
-                  </div>
-                <% }); %>
               <% } else { %>
                 <p>No surat keputusan found.</p>
               <% } %>

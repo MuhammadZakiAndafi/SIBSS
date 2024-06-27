@@ -4,13 +4,9 @@
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/template.css">
     <link rel="stylesheet" href="./css/status.css">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="./output.css">
-=======
->>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
     <title>Riwayat Pengajuan</title>
 </head>
 <body>
@@ -27,33 +23,6 @@
             <span class="text-sm">BSS</span>
             <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
           </a>
-<<<<<<< HEAD
-        <% } %>
-        <% if (userRole === 'mahasiswa') { %>
-          <li class="mb-1 group">
-            <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle"style="color:white;">
-              <i class="ri-graduation-cap-line mr-3 text-lg"></i>
-              <span class="text-sm">BSS</span>
-              <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-            </a>
-            <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-              <li class="mb-4">
-                <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
-              </li> 
-              <li class="mb-4">
-                <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
-              </li> 
-              <li class="mb-4">
-                <a href="/ " class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
-              </li> 
-              <li class="mb-4">
-                <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
-              </li> 
-              <li class="mb-4">
-                <a href="/suratkeputusan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Surat Keputusan</a>
-              </li> 
-            </ul>
-=======
           <ul class="pl-7 mt-2 hidden group-[.selected]:block">
             <li class="mb-4">
               <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Daftar Pengajuan</a>
@@ -76,7 +45,7 @@
           </a>
           <ul class="pl-7 mt-2 hidden group-[.selected]:block">
             <li class="mb-4">
-              <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
+              <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Pendaftaran BSS</a>
             </li> 
             <li class="mb-4">
               <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
@@ -85,7 +54,10 @@
               <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
             </li> 
             <li class="mb-4">
-              <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+              <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Riwayat pengajuan</a>
+            </li> 
+            <li class="mb-4">
+              <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Notifikasi</a>
             </li> 
             <li class="mb-4">
               <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
@@ -244,7 +216,7 @@
               </button>
               <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                   <li>
-                      <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                      <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
@@ -253,7 +225,6 @@
                       <a href="/logout" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
                   </li>
               </ul>
->>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
           </li>
       </ul>
   </div>
@@ -272,82 +243,6 @@
           </select>
           <span class="text-sm">Entries</span>
         </div>
-<<<<<<< HEAD
-        <!-- content -->
-        <div class="p-8 w-11/12 mx-auto">
-          <div class="text-2xl font-bold mb-4">Riwayat Pengajuan</div>
-          <div class="bg-white shadow-lg rounded-lg p-6 overflow-x-auto">
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center space-x-2">
-                <label for="entries" class="text-sm">Show</label>
-                <select id="entries" class="border rounded px-2 py-1 text-sm">
-                  <option>7</option>
-                  <option>10</option>
-                  <option>25</option>
-                  <option>50</option>
-                </select>
-                <span class="text-sm">Entries</span>
-              </div>
-              <div class="relative">
-                <input type="text" placeholder="Silahkan isikan Keyword" class="border rounded px-2 py-1 text-sm">
-                <button class="absolute right-1 top-1">
-                  <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.243 4.243-1.414 1.414-4.243-4.243zm-5.9-5.32a6 6 0 1112 0 6 6 0 01-12 0z" clip-rule="evenodd"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <table class="min-w-full bg-white">
-              <thead class="bg-gray-100">
-                <tr>
-                  <th class="border px-4 py-2">No</th>
-                  <th class="border px-4 py-2">NIM</th>
-                  <th class="border px-4 py-2">Nama Lengkap</th>
-                  <th class="border px-4 py-2">No Hp</th>
-                  <th class="border px-4 py-2">Fakultas</th>
-                  <th class="border px-4 py-2">Departemen</th>
-                  <th class="border px-4 py-2">Alasan berhenti</th>
-                  <th class="border px-4 py-2">Lampiran</th>
-                  <th class="border px-4 py-2">Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% riwayatPengajuan.forEach((item, index) => { %>
-                  <tr>
-                    <td class="border px-4 py-2"><%= index + 1 %></td>
-                    <td class="border px-4 py-2"><%= item.nim %></td>
-                    <td class="border px-4 py-2"><%= item.nama_lengkap %></td>
-                    <td class="border px-4 py-2"><%= item.no_hp %></td>
-                    <td class="border px-4 py-2"><%= item.fakultas %></td>
-                    <td class="border px-4 py-2"><%= item.departement %></td>
-                    <td class="border px-4 py-2"><%= item.alasan_berhenti %></td>
-                    <td class="border px-4 py-2">
-                          <a href="/uploads/<%= item.dokumen_pendukung %>" style="background-color:rgb(96, 207, 181);" download class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Unduh
-                          </a> 
-                    </td>
-                    <td class="border px-4 py-2 ">
-                      <div class="flex justify-center items-center">
-                        <a href="/editPengajuan/<%= item.id %>" style="background-color:rgb(0, 149, 255);" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                          Edit
-                        </a>
-                      </div>
-                    </td>
-                    
-                  </tr>
-                <% }) %>
-              </tbody>
-            </table>
-            
-          </div>
-        </div>
-    <!-- end content -->
-    </main>
-    <!-- end: Main -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./js/script.js"></script>
-=======
         <div class="relative">
           <input type="text" placeholder="Silahkan isikan Keyword" class="border rounded px-2 py-1 text-sm">
           <button class="absolute right-1 top-1">
@@ -372,31 +267,40 @@
           </tr>
         </thead>
         <tbody>
-          <% 
-            var no = 1
-             pengajuans.forEach(pengajuan => { %>
+          <% var no = 1; %>
+          <% pengajuans.forEach(pengajuan => { %>
             <tr>
               <td class="border px-4 py-2"><%= no++ %></td>
               <td class="border px-4 py-2"><%= pengajuan.id %></td>
               <td class="border px-4 py-2"><%= pengajuan.createdAt %></td>
               <td class="border px-4 py-2"><%= pengajuan.kendala_bss %></td>
-              <% if(pengajuan.status == "On Progress"){%>
-              <td class="border px-4 py-2">
-                <span class="inline-flex items-center rounded-md bg-green-5 0 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"><%= pengajuan.status %></span>
-              </td>
-              <%}else{%>
-              <td class="border px-4 py-2">
-                <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20"><%= pengajuan.status %></span>
-              </td>
-              <%}%>
+              <% if (pengajuan.status === "On Progress") { %>
+                <td class="border px-4 py-2">
+                  <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"><%= pengajuan.status %></span>
+                </td>
+              <% } else { %>
+                <td class="border px-4 py-2">
+                  <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20"><%= pengajuan.status %></span>
+                </td>
+              <% } %>
               <td class="border px-4 py-2"><%= pengajuan.tglberenti %></td>
               <td class="border px-4 py-2"><%= pengajuan.periodesemester %></td>
               <td class="border px-4 py-2"><%= pengajuan.batasperiode %></td>
               <td class="border px-4 py-2"><%= pengajuan.statuspemulihan %></td>
+              <td class="border px-4 py-2">
+                <% if (pengajuan.approvalStatus === 'Diterima Kaprodi') { %>
+                  <span style="background:yellow;" class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20"><%= pengajuan.approvalStatus %></span>
+                <% } else if (pengajuan.approvalStatus === 'Diterima Wakil Dekan 1') { %>
+                  <span style="background:rgb(107, 169, 235);" class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20"><%= pengajuan.approvalStatus %></span>
+                <% } else if (pengajuan.approvalStatus === 'Verifikasi') { %>
+                  <span style="background:rgb(67, 216, 189);" class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-600/20"><%= pengajuan.approvalStatus %></span>
+                <% } %>
+              </td>
+              
             </tr>
-          <%})%>
-          
+          <% }) %>
         </tbody>
+        
       </table>
     </div>
   </div>
@@ -407,6 +311,5 @@
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="./js/script.js"></script>
->>>>>>> 4b24d5d3624e4e1a6d388149e089fab3edf312ce
 </body>
 </html>

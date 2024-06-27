@@ -11,4 +11,6 @@ router.post('/register', userController.register);
 router.get('/logout', userController.logout);
 router.get('/profile', cekRole,ensureAuthenticated, userController.showProfile);
 router.post('/profile', userController.profile);
+router.post('/updateProfile', userController.updateProfile);
+router.get('/notifications', ensureAuthenticated,userController.showNotifications);
 module.exports = router;

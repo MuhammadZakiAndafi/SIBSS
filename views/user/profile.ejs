@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./output.css">
     <link rel="stylesheet" href="./css/template.css">
     <link rel="stylesheet" href="./css/status.css">
     <title>Profile</title>
@@ -56,6 +57,12 @@
                   </li> 
                 <li class="mb-4">
                   <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Notifikasi</a>
+                </li> 
+                <li class="mb-4">
+                  <a href="/pengajuanterkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
                 </li> 
                 <li class="mb-4">
                   <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
@@ -214,7 +221,7 @@
                     </button>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                            <a href="/profile" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
                         </li>
                         <li>
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
@@ -229,63 +236,57 @@
 
         <!-- content -->
         <div class="max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-            <!-- Card -->
-            <div class="mt-5 ml-8 p-10 relative z-10 bg-white border drop-shadow-lg rounded-xl sm:mt-0 md:p-10">
-                <main id="content" class="w-full max-w-md mx-auto p-6">
-                    <!-- Avatar Media -->
-                    <div class=" flex justify-center items-center mb-6">
-                        <img class="size-48 rounded-full" src="/public/img/profile.jpeg" alt="Image Description">
-                    </div>
-                    <!-- End Avatar Media -->
-    </main>
-            <div class="text-center mb-8">
-            <h2 class="text-2xl md:text-2xl font-bold text-gray-800 dark:text-neutral-200">
-                Profile
-            </h2>
-            </div>
-            <form action="">
-              <div class="mb-4 sm:mb-8">
-                <label for="nama_lengkap" class="block mb-2 text-sm font-medium"><%= user.name %></label>
-                <input type="text" id="name" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder=<%= userName %> style="font-style: italic;">
-                </div>
-              <div class="mb-4 sm:mb-8">
-                <label for="password" class="block mb-2 text-sm font-medium"><%= user.nim %></label>
-                <input type="text" id="nim/nip class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="221133" style="font-style: italic;">
+          <!-- Card -->
+          <div class="mt-5 p-10 relative z-10 bg-white border drop-shadow-lg rounded-xl sm:mt-0 md:p-10">
+            <main id="content" class="w-full max-w-md mx-auto p-6">
+              <!-- Avatar Media -->
+              <div class="flex justify-center items-center mb-6">
+                <img class="size-48 rounded-full" style="object-fit: cover;" src="/img/profile.jpeg" alt="Image Description">
               </div>
-              <div class="mb-4 sm:mb-8">
-                <label for="no_hp" class="block mb-2 text-sm font-medium"><%= user.email %></label>
-                <input type="text" id="email" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="0822999999" style="font-style: italic;">
-              </div>
-              <div class="mb-4 sm:mb-8">
-                <label for="email" class="block mb-2 text-sm font-medium"><%= user.role %></label>
-                <input type="text" id="role" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder=<%= userEmail %> style="font-style: italic;">
-              </div>
+              <!-- End Avatar Media -->
         
-              <button type="button"
-                  class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-blue-600 text-blue-600 hover:border-blue-500 hover:text-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:border-blue-500 dark:text-blue-500 dark:hover:text-blue-400 dark:hover:border-blue-400">
-                  <a href="/pendaftaranBSS">Kembali</a>
-              </button> 
-              <div class="mt-5 flex justify-end gap-x-2">
-                  <button type="submit"
-                   class="py-1 px-3 inline-flex m-5 items-center gap-x-2 text-base font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-size: initial;">
-                   <a href="/changeProfile">Ubah Profile</a>
-                  </button>
-              <button type="button"
-                  class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none m-4">
-                  <a href="/changePassword">Ubah Password</a>
-              </button>
+              <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-2xl font-bold text-gray-800">
+                  Profile
+                </h2>
+              </div>
+              <form id="profileForm" action="/updateProfile" method="POST">
+                <div class="mb-4 sm:mb-8">
+                  <label for="nama_lengkap" class="block mb-2 text-sm font-medium">Nama</label>
+                  <input type="text" value="<%= user.name %>" id="name" name="name" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Nama Lengkap" style="font-style: italic;">
                 </div>
-            </form>
+                <div class="mb-4 sm:mb-8">
+                  <label for="nim" class="block mb-2 text-sm font-medium">NIM</label>
+                  <input type="text" value="<%= user.nim %>" id="nim" name="nim" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="NIM" style="font-style: italic;">
+                </div>
+                <div class="mb-4 sm:mb-8">
+                  <label for="email" class="block mb-2 text-sm font-medium">Email</label>
+                  <input type="email" id="email" value="<%= user.email %>" name="email" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Email" style="font-style: italic;">
+                </div>
+              
+                <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-blue-600 text-blue-600 hover:border-blue-500 hover:text-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                  <a href="/pendaftaranBSS">Kembali</a>
+                </button>
+                <div class="mt-5 flex justify-end gap-x-2">
+                  <button type="submit" style="background-color:rgb(96, 207, 181);" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Update
+                  </button>
+                  <a href="" style="background-color:rgb(96, 207, 181);" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Ubah Password
+                  </a>
+                </div>
+              </form>
+              
+            </main>
           </div>
           <!-- End Card -->
-          </div>
-            </form>
-          </div>
+        </div>
+        
 
     <!-- end content -->
     </main>
     <!-- end: Main -->
-
+   
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>

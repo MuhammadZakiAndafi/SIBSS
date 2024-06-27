@@ -18,6 +18,7 @@ const upload = multer({ storage });
 router.get('/pendaftaranBss', cekRole,ensureAuthenticated,pengajuanController.showRegisBss);
 router.get('/status', cekRole,ensureAuthenticated,pengajuanController.showStatus);
 router.get('/riwayatpengajuan', cekRole,ensureAuthenticated,pengajuanController.showRiwayat);
+router.get('/pengajuanTerkirim', ensureAuthenticated,pengajuanController.pengajuanTerkirim);
 router.get('/riwayatpengajuanmahasiswa', cekRole,ensureAuthenticated,pengajuanController.showRiwayatMahasiswa);
 router.get('/panduan', cekRole,ensureAuthenticated,pengajuanController.showPanduan);
 router.get('/periodeBSS', cekRole,ensureAuthenticated,pengajuanController.showpPeriodeBSS);
@@ -27,5 +28,6 @@ router.post('/pendaftaranBss', upload.single('dokumen_pendukung'), pengajuanCont
 router.get('/editPengajuan/:id', pengajuanController.editPengajuan);
 router.post('/updatePengajuan/:id', upload.single('dokumen_pendukung'), pengajuanController.updatePengajuan);
 router.delete('/hapusPengajuan/:id', pengajuanController.hapusPengajuan);
+
 
 module.exports = router;
