@@ -12,71 +12,75 @@
 </head>
 <body class="text-gray-800 font-inter">
     
-    <!-- start: Sidebar -->
+    <!-- Sidebar -->
     <div class="fixed left-0 top-0 w-64 h-full p-4 z-50 sidebar-menu transition-transform" style="background-color: rgb(37 99 235);">
       <a href="#" class="flex items-center justify-center h-16 pb-4 border-b border-b-gray-200 w-full">
-        <img src="/img/logounand.png" alt="SIBSS Logo" class="h-8 w-9 mr-3" > <!-- Adjust the path, alt text, and size as needed -->
-        <span class="text-2xl font-bold text-white" style="color: #0CBE5A;">SIBSS</span>
-    </a>
-        <ul class="mt-4">
-          <% if (userRole !== 'mahasiswa') { %>
-            <li class="mb-1 group">
-              <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle"style="color:white;">
-                <i class="ri-graduation-cap-line mr-3 text-lg"></i>
-                <span class="text-sm">BSS</span>
-                <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-              </a>
-              <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                <li class="mb-4">
-                  <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Daftar Pengajuan</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/statusMhs" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat Mahasiswa</a>
-                </li> 
-              </ul>
-            </li>
-          <% } %>
-          <% if (userRole === 'mahasiswa') { %>
-            <li class="mb-1 group">
-              <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle">
-                <i class="ri-graduation-cap-line mr-3 text-lg text-white"></i>
-                <span class="text-sm text-white">BSS</span>
-                <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90 text-white"></i>
-              </a>
-              <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                <li class="mb-4">
-                  <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/riwayatpengajuanmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/notifications" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Notifikasi</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/pengajuanterkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat pengajuan</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
-                </li> 
-                <li class="mb-4">
-                  <a href="/suratkeputusan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Surat Keputusan</a>
-                </li> 
-              </ul>
-            </li>
-          <% } %>
+          <img src="/img/logounand.png" alt="SIBSS Logo" class="h-8 w-9 mr-3" > <!-- Adjust the path, alt text, and size as needed -->
+          <span class="text-2xl font-bold text-white" style="color: #0CBE5A;">SIBSS</span>
+      </a>
+      <ul class="mt-4">
+        <% if (userRole !== 'mahasiswa') { %>
+          <li class="mb-1 group">
+            <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle" style="color:white;">
+              <i class="ri-graduation-cap-line mr-3 text-lg"></i>
+              <span class="text-sm">BSS</span>
+              <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+            </a>
+            <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+              <li class="mb-4">
+                <a href="/daftarPengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Daftar Pengajuan</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/statusdaftarmahasiswa" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status Mahasiswa</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/riwayatpengajuan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Riwayat Mahasiswa</a>
+              </li> 
+            </ul>
+          </li>
+        <% } %>
+        <% if (userRole === 'mahasiswa') { %>
+          <li class="mb-1 group">
+            <a href="#" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500 sidebar-dropdown-toggle">
+              <i class="ri-graduation-cap-line mr-3 text-lg text-white"></i>
+              <span class="text-sm text-white">BSS</span>
+              <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90 text-white"></i>
+            </a>
+            <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+              <li class="mb-4">
+                <a href="/pendaftaranBss" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3" style="color:white;">Pendaftaran BSS</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/status" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Status BSS</a>
+              </li>
+              <li class="mb-4">
+                <a href="/periodeBSS" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Periode BSS</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/pengajuanTerkirim" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Pengajuan Terkirim</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/panduan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Panduan BSS</a>
+              </li> 
+              <li class="mb-4">
+                <a href="/suratkeputusan" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Surat Keputusan</a>
+              </li> 
+            </ul>
+          </li>
+        <% } %>
+        <li class="mb-1">
+          <a href="/notifications" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
+            <i class="ri-notification-3-line mr-3 text-lg"></i>
+            <span class="text-sm">Notifikasi</span>
+          </a>
+        </li>
+        <li class="mb-1">
           <a href="/logout" class="flex items-center py-2 px-4 text-white-300 hover:bg-blue-200 hover:text-blue-600 rounded-md group-[.active]:bg-blue-200 group-[.active]:text-white group-[.selected]:bg-blue-600 group-[.selected]:text-blue-500" style="color:white;">
             <i class="ri-logout-box-line mr-3 text-lg"></i>
-            <span class="text-sm">logout</span>
+            <span class="text-sm">Logout</span>
           </a>
-        </ul>
-        
+        </li>
+      </ul>
     </div>
     <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
     <!-- end: Sidebar -->
@@ -231,6 +235,7 @@
                 </li>
             </ul>
         </div>
+
         <!-- content -->
         <div class="p-8 w-11/12 mx-auto">
           <div class="text-2xl font-bold mb-4">Surat Keputusan</div>
@@ -253,7 +258,7 @@
                     <% } %>
                     <% if (sks.lampiran) { %>
                       <div class="mt-4">
-                        <a href="/uploads/<%= sks.lampiran %>" class="bg-blue-600 text-white rounded px-4 py-2" download>Unduh Lampiran</a>
+                        <a href="/output/<%= sks.lampiran %>" class="bg-blue-600 text-white rounded px-4 py-2" download>Unduh Lampiran</a>
                       </div>
                     <% } %>
               <% } else { %>

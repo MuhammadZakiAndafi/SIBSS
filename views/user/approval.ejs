@@ -229,95 +229,103 @@
             </ul>
         </div>
         <!-- content -->
-        <div class="container mx-auto p-6 con-pendaftaranbss">
-          <form class="space-y-6" action="/approval" method="post" >
-            <input type="hidden" name="approvalType" value="<%= user.role %>"> 
-            <input type="hidden" name="pengajuanId" value="<%= pengajuan.id %>">
-        
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label for="input1" class="block text-sm font-medium text-gray-700">Nama lengkap</label>
-                <input type="text" id="input1" value="<%= pengajuan.nama_lengkap %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-              </div>
-              <div>
-                <label for="input2" class="block text-sm font-medium text-gray-700">NIM</label>
-                <input value="<%= pengajuan.nim %>" type="text" id="input2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-              </div>
-            </div>
-            <!-- Baris kedua -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label for="input3" class="block text-sm font-medium text-gray-700">Tanggal lahir</label>
-                <input type="date" id="input3" value="<%= pengajuan.tanggal_lahir %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-              </div>
-              <div>
-                <label for="jeniskelamin" class="block text-sm font-medium text-gray-700">Jenis kelamin</label>
-                <select id="jeniskelamin" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required readonly disabled>
-                  <option value="Pria" <%= pengajuan.jenis_kelamin === 'Pria' ? 'selected' : '' %>>Pria</option>
-                  <option value="Wanita" <%= pengajuan.jenis_kelamin === 'Wanita' ? 'selected' : '' %>>Wanita</option>
-                </select>
-              </div>
-            </div>
-            <!-- Baris ketiga -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label for="input5" class="block text-sm font-medium text-gray-700">Alamat</label>
-                <input type="text" id="input5" value="<%= pengajuan.alamat %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-              </div>
-              <div>
-                <label for="input6" class="block text-sm font-medium text-gray-700">No HP</label>
-                <input type="text" id="input6" value="<%= pengajuan.no_hp %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-              </div>
-            </div>
-            <!-- Baris keempat -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label for="input7" class="block text-sm font-medium text-gray-700">Departement</label>
-                <input type="text" id="input7" value="<%= pengajuan.departement %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-              </div>
-              <div>
-                <label for="input8" class="block text-sm font-medium text-gray-700">Fakultas</label>
-                <input type="text" id="input8" value="<%= pengajuan.fakultas %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-              </div>
-            </div>
-            <!-- Baris kelima -->
-            <div style="margin-bottom:30px;">
-              <label for="input9" class="block text-sm font-medium text-gray-700">Kendala BSS</label>
-              <input type="text" id="input9" value="<%= pengajuan.kendala_bss %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
-            </div>
-            <!-- Baris keenam -->
-            <div style="margin-bottom:30px;">
-              <label for="input10" class="block text-sm font-medium text-gray-700">Alasan berhenti studi sementara</label>
-              <textarea id="input10" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled><%= pengajuan.alasan_berhenti %></textarea>
-            </div>
-            <div class="mt-4">
-              <a href="/uploads/<%= pengajuan.dokumen_pendukung %>" class="bg-blue-600 text-white rounded px-4 py-2" download>Unduh Berkas Pendukung</a>
-            </div>
-            <!-- Modal Trigger for Reject Reason -->
-            <div>
-              <label for="alasanReject" class="block text-sm font-medium text-gray-700 mb-2">Alasan Penolakan</label>
-              <textarea name="alasanReject" id="alasanReject" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+        <div class="container mx-auto p-6">
+          <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
+            <form class="space-y-6" action="/approval" method="post">
+              <input type="hidden" name="approvalType" value="<%= user.role %>">
+              <input type="hidden" name="pengajuanId" value="<%= pengajuan.id %>">
               
-            </div>
-          
-            <!-- Button submit -->
-            <div class="flex justify-between">
-              <div>
-                <button type="submit" name="action" value="approve" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: rgb(37 99 235);">
-                  Approve
-                </button>
-                <button type="submit" name="action" value="reject" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" style="background-color: rgb(235, 37, 37);">
-                  Submit Reject
-                </button>
+              <!-- Baris pertama -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="input1" class="block text-sm font-medium text-gray-700">Nama lengkap</label>
+                  <input type="text" id="input1" value="<%= pengajuan.nama_lengkap %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+                </div>
+                <div>
+                  <label for="input2" class="block text-sm font-medium text-gray-700">NIM</label>
+                  <input value="<%= pengajuan.nim %>" type="text" id="input2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+                </div>
               </div>
-              <div>
-                <a href="/daftarPengajuan" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                  Kembali
-                </a>
+              
+              <!-- Baris kedua -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="input3" class="block text-sm font-medium text-gray-700">Tanggal lahir</label>
+                  <input type="date" id="input3" value="<%= pengajuan.tanggal_lahir %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+                </div>
+                <div>
+                  <label for="jeniskelamin" class="block text-sm font-medium text-gray-700">Jenis kelamin</label>
+                  <select id="jeniskelamin" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required readonly disabled>
+                    <option value="Pria" <%= pengajuan.jenis_kelamin === 'Pria' ? 'selected' : '' %>>Pria</option>
+                    <option value="Wanita" <%= pengajuan.jenis_kelamin === 'Wanita' ? 'selected' : '' %>>Wanita</option>
+                  </select>
+                </div>
               </div>
-            </div>
-        </form>
-        
+              
+              <!-- Baris ketiga -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="input5" class="block text-sm font-medium text-gray-700">Alamat</label>
+                  <input type="text" id="input5" value="<%= pengajuan.alamat %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+                </div>
+                <div>
+                  <label for="input6" class="block text-sm font-medium text-gray-700">No HP</label>
+                  <input type="text" id="input6" value="<%= pengajuan.no_hp %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+                </div>
+              </div>
+              
+              <!-- Baris keempat -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="input7" class="block text-sm font-medium text-gray-700">Departement</label>
+                  <input type="text" id="input7" value="<%= pengajuan.departement %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+                </div>
+                <div>
+                  <label for="input8" class="block text-sm font-medium text-gray-700">Fakultas</label>
+                  <input type="text" id="input8" value="<%= pengajuan.fakultas %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+                </div>
+              </div>
+              
+              <!-- Baris kelima -->
+              <div style="margin-bottom:30px;">
+                <label for="input9" class="block text-sm font-medium text-gray-700">Kendala BSS</label>
+                <input type="text" id="input9" value="<%= pengajuan.kendala_bss %>" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled>
+              </div>
+              
+              <!-- Baris keenam -->
+              <div style="margin-bottom:30px;">
+                <label for="input10" class="block text-sm font-medium text-gray-700">Alasan berhenti studi sementara</label>
+                <textarea id="input10" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly disabled><%= pengajuan.alasan_berhenti %></textarea>
+              </div>
+              
+              <div class="mt-4">
+                <a href="/uploads/<%= pengajuan.dokumen_pendukung %>" class="bg-blue-600 text-white rounded px-4 py-2" download>Unduh Berkas Pendukung</a>
+              </div>
+              
+              <!-- Modal Trigger for Reject Reason -->
+              <div>
+                <label for="alasanReject" class="block text-sm font-medium text-gray-700 mb-2">Alasan Penolakan</label>
+                <textarea name="alasanReject" id="alasanReject" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+              </div>
+              
+              <!-- Button submit -->
+              <div class="flex justify-between">
+                <div>
+                  <button type="submit" name="action" value="approve" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Approve
+                  </button>
+                  <button type="submit" name="action" value="reject" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" style="background-color: rgb(235, 37, 37);">
+                    Submit Reject
+                  </button>
+                </div>
+                <div>
+                  <a href="/daftarPengajuan" class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    Kembali
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
         
                 <!-- end content -->
