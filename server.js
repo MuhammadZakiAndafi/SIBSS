@@ -21,13 +21,13 @@ app.use(session({
   secret: 'secret-key',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Pastikan secure diatur ke true di production
+  cookie: { secure: false } 
 }));
 
-// Middleware untuk flash messages
+
 app.use(flash());
 
-// Middleware untuk mengatur flash messages ke res.locals
+
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -38,14 +38,14 @@ app.get('/', (req, res) => {
   res.render('user/dashboard');
 });
 
-// routes
+
 app.use('/', userRoutes);
 app.use('/', pengajuanRoutes);
 app.use('/', approvalRoutes);
 app.use('/', skRoutes);
 
 
-sequelize.sync({ force: false })  // Set to true if you want to drop and recreate tables
+sequelize.sync({ force: false })  
   .then(() => {
     console.log('Database synced');
   })

@@ -1,4 +1,4 @@
-// Model (Sequelize)
+
 module.exports = (sequelize, DataTypes) => {
   const Approval = sequelize.define('Approval', {
       statusApprovalKaprodi: {

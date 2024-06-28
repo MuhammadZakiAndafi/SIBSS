@@ -141,8 +141,7 @@ exports.logout = (req, res) => {
 };
 
 exports.showProfile = async (req, res) => {
-  const userRole = req.session.user.role; // Mendapatkan role user
-    // Render halaman status dengan data approvals dan pengguna yang sedang login
+  const userRole = req.session.user.role; 
     res.render('user/profile', {
       title: 'Profile',
       user: req.session.user, 
@@ -151,10 +150,8 @@ exports.showProfile = async (req, res) => {
   };
 
 exports.profile = async (req, res) => {
-   // Ambil data pengguna yang sedang login
    const userId = req.session.user.id;
 
-   // Ambil pengajuanId dari model Pengajuan berdasarkan userId
    try {
     const user = await db.User.findOne({
       where: { id: userId },
@@ -170,10 +167,9 @@ exports.profile = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
-    const userId = req.session.user.id; // Ambil ID pengguna dari sesi
-    const { name, nim, email } = req.body; // Ambil data dari body request
+    const userId = req.session.user.id; 
+    const { name, nim, email } = req.body; 
 
-    // Pastikan pengguna ditemukan
     const user = await db.User.findOne({
       where: {
         id: userId
@@ -184,7 +180,6 @@ exports.updateProfile = async (req, res) => {
       return res.status(404).send('User not found');
     }
 
-    // Update profil berdasarkan ID pengguna
     const [updatedRows] = await db.User.update({
       name,
       nim,
@@ -199,15 +194,13 @@ exports.updateProfile = async (req, res) => {
       return res.status(404).send('User not found or not updated');
     }
 
-    // Perbarui data pengguna dalam sesi setelah berhasil diupdate
     req.session.user = await db.User.findOne({
       where: {
         id: userId
       }
     });
 
-    res.redirect('/profile'); // Redirect setelah berhasil update
-
+    res.redirect('/profile'); 
   } catch (error) {
     console.error('Error updating profile:', error);
     res.status(500).send('Internal Server Error');

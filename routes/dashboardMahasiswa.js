@@ -6,14 +6,14 @@ const { changePassword }= require ('../controller/auth');
 const checkRole = require('../middleware/checkRole');
 const { User } = require('../models');
 
-router.get('/mahasiswa/home', verifyToken, checkRole("mahasiswa"), function(req, res) {// akses data
+router.get('/mahasiswa/home', verifyToken, checkRole("mahasiswa"), function(req, res) {
   const userId = req.userId;
   const userEmail = req.userEmail;
   const userName = req.userName;
   const userroleId = req.userroleId;
   const userRole = req.userRole;
 
-  res.render('mahasiswa/home', { userId,userEmail,userName,userroleId,userRole });//akses front end
+  res.render('mahasiswa/home', { userId,userEmail,userName,userroleId,userRole });
 });
 
 router.get('/mahasiswa/profile', verifyToken, function(req, res, next) {
@@ -57,7 +57,7 @@ router.post('/change-password', verifyToken, async (req, res) => {
 
 router.get('/profile', async function(req, res, next) {
   try {
-    const user = await User.findOne(); // Ambil user pertama dari database
+    const user = await User.findOne(); 
     res.render('profile', { user: user });
   } catch (error) {
     next(error);
@@ -65,22 +65,3 @@ router.get('/profile', async function(req, res, next) {
 });
 
 module.exports = router;
-/* const express = require('express');
-const router = express.Router();
-
-// Route dashboard
-router.get('/', (req, res) => {
-  try {
-    if (req.session.loggedin) {
-      res.render('dashboard', { username: req.session.username });
-    } else {
-      res.redirect('/login');
-    }
-  } catch (error) {
-    console.error('Error in dashboard route:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-
-module.exports = router; */

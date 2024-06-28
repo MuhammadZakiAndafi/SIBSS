@@ -9,7 +9,7 @@ exports.showRegisBss = async (req, res) => {
   try {
     const user = await db.User.findOne({ where: { id: req.session.user.id } });
     const userlogin = req.session.user;
-    const userRole = userlogin.role; // Mendapatkan role user
+    const userRole = userlogin.role; 
     res.render('user/pendaftaranBSS', { 
       title: 'Pendaftaran BSS',
       user: user,
@@ -23,12 +23,11 @@ exports.showRegisBss = async (req, res) => {
 
 exports.editPengajuan = async (req, res) => {
   try {
-    const pengajuanId = req.params.id; // Get the pengajuan ID from the URL parameter
-    const user = await db.User.findOne({ where: { id: req.session.user.id } }); // Get the logged-in user's data
+    const pengajuanId = req.params.id; 
+    const user = await db.User.findOne({ where: { id: req.session.user.id } });
     const userlogin = req.session.user;
-    const userRole = userlogin.role; // Get the user role
+    const userRole = userlogin.role; 
 
-    // Fetch the specific pengajuan record
     const pengajuan = await db.Pengajuan.findOne({ where: { id: pengajuanId, userId: req.session.user.id } });
 
     if (!pengajuan) {
@@ -39,7 +38,7 @@ exports.editPengajuan = async (req, res) => {
       title: 'Edit Pengajuan',
       user: user,
       userRole,
-      pengajuan // Pass the pengajuan data to the view
+      pengajuan 
     });
   } catch (error) {
     console.error('Error fetching pengajuan:', error);
@@ -49,20 +48,18 @@ exports.editPengajuan = async (req, res) => {
 
 exports.updatePengajuan = async (req, res) => {
   try {
-      const pengajuanId = req.params.id; // Ambil ID pengajuan dari parameter URL
+      const pengajuanId = req.params.id; 
       const { nama_lengkap, nim, tanggal_lahir, jenis_kelamin, alamat, no_hp, departement, fakultas, kendala_bss, alasan_berhenti } = req.body; // Ambil data dari body request
       let dokumen_pendukung = null;
       
-      // Jika ada file yang diunggah, simpan nama filenya
       if (req.file) {
           dokumen_pendukung = req.file.filename;
       }
 
-      // Pastikan pengajuan ditemukan dan pengguna memiliki izin
       const pengajuan = await db.Pengajuan.findOne({
           where: {
               id: pengajuanId,
-              userId: req.session.user.id // Pastikan pengajuan hanya dapat diupdate oleh pemiliknya
+              userId: req.session.user.id 
           }
       });
 
@@ -70,7 +67,6 @@ exports.updatePengajuan = async (req, res) => {
           return res.status(404).send('Pengajuan not found or you are not authorized to update it');
       }
 
-      // Update pengajuan berdasarkan ID
       const [updatedRows] = await db.Pengajuan.update({
           nama_lengkap,
           nim,
@@ -93,8 +89,7 @@ exports.updatePengajuan = async (req, res) => {
           return res.status(404).send('Pengajuan not found or you are not authorized to update it');
       }
 
-      res.redirect('/pengajuanTerkirim'); // Redirect setelah berhasil update
-
+      res.redirect('/pengajuanTerkirim'); 
   } catch (error) {
       console.error('Error updating pengajuan:', error);
       res.status(500).send('Internal Server Error');
@@ -107,11 +102,11 @@ exports.updatePengajuan = async (req, res) => {
 
 exports.showPanduan = async (req, res) => {
   try {
-    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
-    const userRole = user.role; // Mendapatkan role user
+    const userId = req.session.user.id; 
+    const user = req.session.user; 
+    const userRole = user.role; 
 
-    // Ambil pengajuan yang terhubung dengan userId
+    
     const pengajuan = await db.Pengajuan.findOne({
       where: { userId: userId }
     });
@@ -120,10 +115,10 @@ exports.showPanduan = async (req, res) => {
       return res.status(404).send('Data pengajuan tidak ditemukan');
     }
 
-    // Ambil dokumen_pendukung dari pengajuan
+   
     const dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : [];
 
-    // Render halaman panduan dengan data dokumenPendukung
+    
     res.render('user/panduan', {
       title: 'Panduan',
       dokumenPendukung: dokumenPendukung,
@@ -168,11 +163,9 @@ exports.showStatus = async (req, res) => {
 
 exports.showRiwayat = async (req, res) => {
   const userlogin = req.session.user;
-  const userRole = userlogin.role; // Mendapatkan role user
-
+  const userRole = userlogin.role; 
   const pengajuans = await db.Pengajuan.findAll();
 
-  // console.log(pengajuans);
 
   if (!pengajuans) {
     throw new Error('Pengajuan not found');
@@ -182,7 +175,6 @@ exports.showRiwayat = async (req, res) => {
       var d = new Date();
       const year = d.getFullYear();
       const month = d.getMonth();
-      // var lastDay = new Date(year, month + 1, 0).getDate();
       var status = "";
       var periodesemester = "";
       var tglberenti = "";
@@ -231,9 +223,6 @@ exports.showRiwayat = async (req, res) => {
 };
 
 
-
-
-
 exports.showRiwayatMahasiswa = async (req, res) => {
   try {
     const userlogin = req.session.user;
@@ -244,7 +233,7 @@ exports.showRiwayatMahasiswa = async (req, res) => {
       include: [
         {
           model: db.Approval,
-          as: 'approvals', // Ensure this matches your model association
+          as: 'approvals', 
         },
       ],
     });
@@ -270,7 +259,7 @@ exports.showRiwayatMahasiswa = async (req, res) => {
       const selisih = moment(tglberenti).diff(moment(pengajuan.createdAt), 'days');
       status = selisih < 0 ? 'BSS Berakhir' : 'On Progress';
 
-      const approval = pengajuan.approvals[0]; // Assuming one-to-one relationship for simplicity
+      const approval = pengajuan.approvals[0]; 
       let approvalStatus = '';
       if (approval) {
         if (approval.statusApprovalKaprodi) {
@@ -319,13 +308,13 @@ exports.createPermohonanBss = async (req, res) => {
       dokumen_pendukung = req.file.filename;
     }
 
-    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
+    const userId = req.session.user.id; 
 
     const permohonan = await db.Pengajuan.create({
       nama_lengkap, nim, tanggal_lahir, jenis_kelamin,
       alamat, no_hp, departement, fakultas,
       kendala_bss, alasan_berhenti, dokumen_pendukung,
-      userId: userId // Pastikan nama kolom 'UserId' sesuai dengan definisi model Pengajuan
+      userId: userId 
     });
 
     console.log('Permohonan berhasil dibuat:', permohonan);
@@ -338,9 +327,9 @@ exports.createPermohonanBss = async (req, res) => {
 
 exports.hapusPengajuan = async (req, res) => {
   try {
-      const pengajuanId = req.params.id; // Ambil ID pengajuan dari parameter URL
+      const pengajuanId = req.params.id; 
 
-      // Lakukan proses penghapusan berdasarkan ID
+      
       const deletedRows = await db.Pengajuan.destroy({
           where: {
               id: pengajuanId
@@ -359,11 +348,10 @@ exports.hapusPengajuan = async (req, res) => {
 }
 exports.showpPeriodeBSS = async (req, res) => {
   try {
-    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
-    const userRole = user.role; // Mendapatkan role user
+    const userId = req.session.user.id; 
+    const user = req.session.user; 
+    const userRole = user.role; 
 
-    // Ambil pengajuan yang terhubung dengan userId
     const pengajuans = await db.Pengajuan.findAll({
       where: { userId: userId }
     });
@@ -377,7 +365,7 @@ exports.showpPeriodeBSS = async (req, res) => {
         var d = new Date();
         const year = d.getFullYear();
         const month = d.getMonth();
-        // var lastDay = new Date(year, month + 1, 0).getDate();
+        
         var status = "";
         var periodesemester = "";
         const monthcreated = pengajuan.createdAt.toJSON().substring(5, 7);
@@ -413,10 +401,6 @@ exports.showpPeriodeBSS = async (req, res) => {
       });
     }
 
-    // // Ambil dokumen_pendukung dari pengajuan
-    // const dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : [];
-
-    // Render halaman panduan dengan data dokumenPendukung
     res.render('user/periodeBSS', {
       title: 'Periode BSS',
       pengajuans: pengajuanss,
@@ -457,11 +441,9 @@ exports.showpStatusDaftarMahasiswa = async (req, res) => {
 
 exports.detailPengajuan = async (req, res) => {
   try {
-    // const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
-    const userRole = user.role; // Mendapatkan role user
+    const user = req.session.user; 
+    const userRole = user.role; 
 
-    // Ambil pengajuan yang terhubung dengan userId
     const pengajuans = await db.Pengajuan.findAll({
       where: { id: req.params.id }
     });
@@ -470,10 +452,6 @@ exports.detailPengajuan = async (req, res) => {
       return res.status(404).send('Data pengajuan tidak ditemukan');
     } 
 
-    // // Ambil dokumen_pendukung dari pengajuan
-    // const dokumenPendukung = pengajuan.dokumen_pendukung ? pengajuan.dokumen_pendukung.split(',') : [];
-
-    // Render halaman panduan dengan data dokumenPendukung
     res.render('user/detailpengajuan', {
       title: 'Detail Pengajuan',
       pengajuans: pengajuans,
@@ -488,17 +466,14 @@ exports.detailPengajuan = async (req, res) => {
 
 exports.pengajuanTerkirim = async (req, res) => {
   try {
-    const userId = req.session.user.id; // Ambil userId dari pengguna yang sedang login
-    const user = req.session.user; // Asumsikan req.user menyimpan informasi user yang sedang login
-    const userRole = user.role; // Mendapatkan role user
+    const userId = req.session.user.id; 
+    const user = req.session.user; 
+    const userRole = user.role; 
 
-    // Ambil semua pengajuan yang terhubung dengan userId
     const pengajuanList = await db.Pengajuan.findAll({
       where: { userId: userId }
     });
 
-
-    // Process dokumen_pendukung for each pengajuan
     const riwayatPengajuan = pengajuanList.map(pengajuan => {
       return {
         ...pengajuan.dataValues,
@@ -506,11 +481,10 @@ exports.pengajuanTerkirim = async (req, res) => {
       };
     });
 
-    // Render halaman riwayat pengajuan dengan data pengajuan dan dokumenPendukung
     res.render('user/pengajuanTerkirim', {
       title: 'Pengajuan Terkirim',
       userRole,
-      riwayatPengajuan // pass the fetched data to the view
+      riwayatPengajuan 
     });
   } catch (error) {
     console.error('Error fetching pengajuan data:', error);
