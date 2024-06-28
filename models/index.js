@@ -12,14 +12,12 @@ db.Pengajuan = require('./pengajuan')(sequelize, DataTypes);
 db.Approval = require('./approval')(sequelize, DataTypes);
 db.SuratKeputusan = require('./sk')(sequelize, DataTypes);
 
-// Mengatur asosiasi model
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
 
-// Sinkronisasi model
 sequelize.sync({ force: false }).then(() => {
   console.log('Database & tables created!');
 });

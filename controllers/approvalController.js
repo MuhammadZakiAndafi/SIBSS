@@ -2,7 +2,7 @@ const db = require('../models');
 
 exports.daftarPengajuan = async (req, res) => {
   const userlogin = req.session.user;
-  const userRole = userlogin.role; // Mendapatkan role user
+  const userRole = userlogin.role; 
   const pengajuans = await db.Pengajuan.findAll();
   res.render('user/daftarPengajuan', {
      pengajuans,
@@ -39,7 +39,6 @@ exports.showDetail = async (req, res) => {
   }
 };
 
-// Controller
 exports.updateApprovalStatus = async (req, res) => {
   const { approvalType, action, pengajuanId, alasanReject } = req.body;
 
